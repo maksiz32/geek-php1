@@ -1,0 +1,13 @@
+RewriteBase /
+AddDefaultCharset Off
+Options -Indexes
+<IfModule dir_module>
+    DirectoryIndex index.php
+</IfModule>
+
+Options All -Indexes
+
+<Files .htaccess>
+order allow,deny
+deny from all
+</Files>
