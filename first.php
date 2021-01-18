@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html lang="ru">
     <head>
-        <title><?= $page_title ?></title>
+        <title>Практическая работа 2</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <h1><?= $paragraf_title ?></h1>
-        <ol start="3">
-            <li>
-                <pre>
-    $a = 5; //Integer
-    $b = '05'; //String
-    var_dump($a == $b);         // Почему true? - Потому что используется нестрогое сравнение значений без сравнения типов - 5==5
-    var_dump((int)'012345');     // Почему 12345? Строка преобразуется в число, а в типе INT нет ведущего нуля.
-    var_dump((float)123.0 === (int)123.0); // Почему false? - Потому что === это операция строгого сравнения, т.е. типы переменных должны совпадать тоже
-    var_dump((int)0 === (int)'hello, world'); // Почему true? Потому что при попытке преобразовать строку в число PHP потерпит неудачу и присвоит ответу 0. В сравнении будут числа 0===0
-                </pre>
-            </li>
-            <li>
-                Текущий год - <?= $year ?>
-            </li>
-            <li>
-                <pre>
-    $a = 1;
-    $b = 2;
-                    <?="\n\tA = {$a}, B = $b<br><br>";?>
-    $a = $a + $b;
-    $b = $a - $b;
-    $a = $a - $b;
-                    <?="\n\tA = {$a}, B = $b";?>
-                </pre>
-            </li>
-        </ol>
+        <h1>Практическая работа №2</h1>
+            <h2>Задание 1:</h2>
+                <p>
+                    <?=$first?>
+                </p>
+            <h2>Задание 2:</h2>
+                <p>
+                    <?=$second?>
+                </p>
+            <h2>Задание 3:</h2>
+                <p>
+                    Сумма <?=$a1 = 55?> и <?=$b1 = 82?> равна <strong><?=sum($a1, $b1)?></strong>
+                </p>
+                <p>
+                    Разность <?=$a1 = 55?> и <?=$b1 = 82?> равна <strong><?=minus($a1, $b1)?></strong>
+                </p>
+                <p>
+                    Произведение <?=$a1 = 55?> и <?=$b1 = 82?> равно <strong><?=mult($a1, $b1)?></strong>
+                </p>
+                <p>
+                    Частное <?=$a1 = 55?> и <?=$b1 = 82?> равно <strong><?=del($a1, $b1)?></strong>
+                </p>
+            <h2>Задание 4:</h2>
+                <p>
+                    <?=mathOperation(203, -5, 'del')?>
+                </p>
+            <h2>Задание 6:</h2>
+                <p>
+                    Возведение числа <?=$a2 = 2?> в степень <?=$b2 = -3?> равно <strong><?=power($a2, $b2)?></strong>
+                </p>
+        <footer style="text-align: center; background-color: grey; color: white; height: 10vh; white-space: pre-line;">
+            <?=$year?>
+        </footer>
     </body>
 </html>
