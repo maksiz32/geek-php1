@@ -17,103 +17,92 @@
     }
 // №2.
     $a2 = mt_rand(0, 15);
+
     function fifteen($fif) {
         if ($fif > 15) {
-            return true;
+            return null;
         }
         return $fif . ' ' . fifteen($fif + 1);
     }
+
     switch ($a2) {
         case 0:
-            for (; $a <= 15; $a++) {
-                $second .= $a . ' ';
-            }
+            $second = fifteen($a2);
             break;
         case 1:
-            for (; $a <= 15; $a++) {
-                $second .= $a . ' ';
-            }
+            $second = fifteen($a2);
             break;
         case 2:
-            for (; $a <= 15; $a++) {
-                $second .= $a . ' ';
-            }
+            $second = fifteen($a2);
             break;
         case 3:
-            for (; $a <= 15; $a++) {
-                $second .= $a . ' ';
-            }
+            $second = fifteen($a2);
             break;
         case 4:
-            for (; $a <= 15; $a++) {
-                $second .= $a . ' ';
-            }
+            $second = fifteen($a2);
             break;
         case 5:
-            $second = $a . ', 6, 7, 8, 9, 10, 11, 12, 13, 14, 15';
+            $second = fifteen($a2);
             break;
         case 6:
-            $second = $a . ', 7, 8, 9, 10, 11, 12, 13, 14, 15';
+            $second = fifteen($a2);
             break;
         case 7:
-            $second = $a . ', 8, 9, 10, 11, 12, 13, 14, 15';
+            $second = fifteen($a2);
             break;
         case 8:
-            $second = $a . ', 9, 10, 11, 12, 13, 14, 15';
+            $second = fifteen($a2);
             break;
         case 9:
-            $second = $a . ', 10, 11, 12, 13, 14, 15';
+            $second = fifteen($a2);
             break;
         case 10:
-            $second = $a . ', 11, 12, 13, 14, 15';
+            $second = fifteen($a2);
             break;
         case 11:
-            $second = $a . ', 12, 13, 14, 15';
+            $second = fifteen($a2);
             break;
         case 12:
-            $second = $a . ', 13, 14, 15';
+            $second = fifteen($a2);
             break;
         case 13:
-            $second = $a . ', 13, 14, 15';
+            $second = fifteen($a2);
             break;
         case 14:
-            $second = $a . ', 15';
+            $second = fifteen($a2);
             break;
         case 15:
-            $second = $a;
+            $second = fifteen($a2);
             break;
     }
 // №3.
-    function sum($a1, $b1) {
-        return $a1 + $b1;
+    function sum($a3, $b3) {
+        return $a3 + $b3;
     }
-    function minus($a1, $b1) {
-        return $a1 - $b1;
+    function minus($a3, $b3) {
+        return $a3 - $b3;
     }
-    function mult($a1, $b1) {
-        return $a1 * $b1;
+    function mult($a3, $b3) {
+        return $a3 * $b3;
     }
-    function del($a1, $b1) {
-        if ($b1 !== 0) {
-            return $a1 / $b1;
-        } else {
-            return 'Деление на ноль';
-        }
+    function del($a3, $b3) {
+        ($b3 !== 0) ? $req3 = $a3 / $b3 : $req3 = 'Деление на ноль';
+        return $req3;
     }
 // №4.
     function mathOperation($arg1, $arg2, $operation) {
         switch ($operation) {
             case 'sum':
-                return sum($arg1, $arg2);
+                return sum($arg1, $arg2) . ' - сумма ' . $arg1 . ' и ' . $arg2;
                 break;
             case 'minus':
-                return minus($arg1, $arg2);
+                return minus($arg1, $arg2) . ' - разность ' . $arg1 . ' и ' . $arg2;
                 break;
             case 'mult':
-                return mult($arg1, $arg2);
+                return mult($arg1, $arg2) . ' - произведение ' . $arg1 . ' и ' . $arg2;
                 break;
             case 'del':
-                return del($arg1, $arg2);
+                return del($arg1, $arg2) . ' - частное ' . $arg1 . ' и ' . $arg2;
                 break;
             default:
                 return 'Данная функция неопределена';
