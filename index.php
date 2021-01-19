@@ -1,33 +1,53 @@
 <?php
+    $titlePage = 'Практическая работа 2';
 // №1.
-    $a = 22;
-    $b = -45;
-    if ($a >= 0 && $b >= 0) {
-        $first = $a - $b;
+    $x = mt_rand(-50, 50);
+    $y = mt_rand(-50, 50);
+    if ($x >= 0 && $y >= 0) {
+        $req = $x - $y;
+        $first = 'Разность равна ' . $req;
     }
-    else if (($a >= 0 && $b < 0) || ($a < 0 && $b >= 0)) {
-        $first = $a + $b;
+    else if (($x >= 0 && $y < 0) || ($x < 0 && $y >= 0)) {
+        $req = $x + $y;
+        $first = 'Сумма равна ' . $req;
     }
     else {
-        $first = $a * $b;
+        $req = $x * $y;
+        $first = 'Произведение равно ' . $req;
     }
 // №2.
-    $a = mt_rand(0, 15);
-    switch ($a) {
+    $a2 = mt_rand(0, 15);
+    function fifteen($fif) {
+        if ($fif > 15) {
+            return true;
+        }
+        return $fif . ' ' . fifteen($fif + 1);
+    }
+    switch ($a2) {
         case 0:
-            $second = $a . ', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15';
+            for (; $a <= 15; $a++) {
+                $second .= $a . ' ';
+            }
             break;
         case 1:
-            $second = $a . ', 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15';
+            for (; $a <= 15; $a++) {
+                $second .= $a . ' ';
+            }
             break;
         case 2:
-            $second = $a . ', 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15';
+            for (; $a <= 15; $a++) {
+                $second .= $a . ' ';
+            }
             break;
         case 3:
-            $second = $a . ', 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15';
+            for (; $a <= 15; $a++) {
+                $second .= $a . ' ';
+            }
             break;
         case 4:
-            $second = $a . ', 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15';
+            for (; $a <= 15; $a++) {
+                $second .= $a . ' ';
+            }
             break;
         case 5:
             $second = $a . ', 6, 7, 8, 9, 10, 11, 12, 13, 14, 15';
@@ -106,10 +126,14 @@
         if ($pow < 0) {
             return power(1 / $val, Abs($pow));
         }
-        if ($pow !== 0) {
+        else if ($pow > 0) {
             return $val * power($val, $pow - 1);
         }
-        return 1;
+        else {
+            return 1;
+        }
     }
-
+// №7.
+    $currientTime = explode(":", date('H:i'));
+// Написать функцию, которая вычисляет текущее время и возвращает его в формате с правильными склонениями, например: 22 часа 15 минут, 21 час 43 минуты
     include 'first.php';
