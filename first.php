@@ -67,7 +67,7 @@
                     </p>
                 <h2>Задание 7:</h2>
                     <p>
-                        Текущее время <strong><?=$currientTime[0]?></strong>
+                        Текущее время: <strong><?=$currH?> <?=$currM?></strong>
                     </p>
         </div>
         <footer>
