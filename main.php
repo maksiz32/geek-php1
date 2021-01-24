@@ -1,117 +1,99 @@
 <?php
-    $titlePage = 'Практическая работа 2';
-// №1.
-    $x = mt_rand(-50, 50);
-    $y = mt_rand(-50, 50);
-    if ($x >= 0 && $y >= 0) {
-        $req = $x - $y;
-        $first = 'Разность равна ' . $req;
-    }
-    else if ($x < 0 && $y < 0) {
-        $req = $x * $y;
-        $first = 'Произведение равно ' . $req;
-    }
-    else {
-        $req = $x + $y;
-        $first = 'Сумма равна ' . $req;
-    }
-// №2.
-    $a2 = mt_rand(0, 15);
-
-    function fifteen($fif) {
-        if ($fif > 15) {
-            return null;
-        }
-        return $fif . ' ' . fifteen($fif + 1);
-    }
-    $second = fifteen($a2);
-// №3.
-    function sum($a3, $b3) {
-        return $a3 + $b3;
-    }
-    function minus($a3, $b3) {
-        return $a3 - $b3;
-    }
-    function mult($a3, $b3) {
-        return $a3 * $b3;
-    }
-    function del($a3, $b3) {
-        return ($b3 !== 0) ? $a3 / $b3 : 'Деление на ноль';
-    }
-// №4.
-    function mathOperation($arg1, $arg2, $operation) {
-        switch ($operation) {
-            case 'sum':
-                return sum($arg1, $arg2) . ' - сумма ' . $arg1 . ' и ' . $arg2;
-            case 'minus':
-                return minus($arg1, $arg2) . ' - разность ' . $arg1 . ' и ' . $arg2;
-            case 'mult':
-                return mult($arg1, $arg2) . ' - произведение ' . $arg1 . ' и ' . $arg2;
-            case 'del':
-                return del($arg1, $arg2) . ' - частное ' . $arg1 . ' и ' . $arg2;
-            default:
-                return 'Данная функция неопределена';
+#1
+    $i = 0;
+    while ($i++ <= 100) {
+        if ($i % 3 === 0) {
+            echo $i . "<br>";
         }
     }
-// №5.    
-    $year = date('Y') . " год";
-// №6.
-    function power($val, $pow) {
-        if ($pow < 0) {
-            return power(1 / $val, Abs($pow));
-        }
-        else if ($pow > 0) {
-            return $val * power($val, $pow - 1);
-        }
-        else {
-            return 1;
-        }
-    }
-// №7.
-    function ruTime($inpT, $what) {
-        $exp = [
-            'h' => 'час',
-            'm' => 'минут',
-            's' => 'секунд'
-        ];
-        $endDef = [
-            'h' => 'ов',
-            'm' => '',
-            's' => ''
-        ];
-        $end1 = [
-            'h' => '',
-            'm' => 'а',
-            's' => 'а'
-        ];
-        $end2 = [
-            'h' => 'а',
-            'm' => 'ы',
-            's' => 'ы'
-        ];
-        //
-        if ($inpT >= 10 && $inpT < 20 ) {
-            $outT = "{$inpT} {$exp[$what]}{$endDef[$what]}";
+#2
+    $n = 0;
+    $str = '';
+    do {
+        if ($n === 0) {
+            $str .= $n ." - это ноль.<br>";
         } else {
-            $mod = $inpT % 10;
-            switch ($mod) {
-                case 1:
-                    $outT = "{$inpT} {$exp[$what]}{$end1[$what]}";
-                    break;
-                case 2:
-                case 3:
-                case 4:
-                    $outT = "{$inpT} {$exp[$what]}{$end2[$what]}";
-                    break;
-                default:
-                    $outT = "{$inpT} {$exp[$what]}{$endDef[$what]}";
-            }
+            ($n % 2 === 0) ? $str .= $n . " - чётное число.<br>" : $str .= $n . " - нечётное число.<br>";
         }
-        return $outT;
+    } while (++$n <= 10);
+    echo $str;
+#3
+    $arr3 = [
+        'Московская область' => [
+            'Москва', 'Зеленоград', 'Клин'
+        ],
+        'Ленинградская область' => [
+            'Санкт-Петербург', 'Всеволожск', 'Павловск', 'Кронштадт'
+        ],
+        'Брянская область' => [
+            'Брянск', 'Новозыбков', 'Клинцы', 'Жуковка'
+        ],
+        'Калужская область' => [
+            'Калуга', 'Обнинск', 'Жиздра'
+        ]
+    ];
+    function regionsRus($arr, $countV = 0) {
+        foreach ($arr as $key => $val) {
+            if (!is_int($key)){
+                echo "{$key}:<br>";
+            }
+                if (is_array($val)) {
+                    $count = count($val);
+                    regionsRus($val, $count);
+                } else {
+                    echo $val;
+                    if (--$countV > 0) {
+                        echo ', ';
+                    } else {
+                        echo '<br>';
+                    }
+                }
+        }
     }
-        $currientTime = explode(":", date('g:i:s'));
-        $currH = ruTime($currientTime[0], 'h');//h - час
-        $currM = ruTime($currientTime[1], 'm');//m - минута
-        $currS = ruTime($currientTime[2], 's');//s - секунда
-    
-    include 'first.php';
+    regionsRus($arr3);
+#4
+    function translite($str) {
+        $alfabet = [
+            'а' => 'a',   'б' => 'b',   'в' => 'v',
+            'г' => 'g',   'д' => 'd',   'е' => 'e',
+            'ё' => 'e',   'ж' => 'zh',  'з' => 'z',
+            'и' => 'i',   'й' => 'y',   'к' => 'k',
+            'л' => 'l',   'м' => 'm',   'н' => 'n',
+            'о' => 'o',   'п' => 'p',   'р' => 'r',
+            'с' => 's',   'т' => 't',   'у' => 'u',
+            'ф' => 'f',   'х' => 'h',   'ц' => 'c',
+            'ч' => 'ch',  'ш' => 'sh',  'щ' => 'sch',
+            'ь' => '\'',  'ы' => 'y',   'ъ' => '\'',
+            'э' => 'e',   'ю' => 'yu',  'я' => 'ya'
+            ];
+        $strOut = '';
+        $lowCase = false;
+        $len = mb_strlen($str);
+        for ($i = 0; $i < $len; $i++) {
+            $st = mb_substr($str, $i, 1);
+            if ($st === mb_strtoupper($st)) {
+                $lowCase = true;
+            }
+            ($lowCase) ? $strOut .= mb_strtoupper($alfabet[mb_strtolower($st)]) : $strOut .= $alfabet[$st];
+            $lowCase = false;
+        }
+        echo $strOut;
+    }
+    translite('Объявить массив, Индексами');
+/*
+5. Написать функцию, которая заменяет в строке пробелы на подчеркивания и возвращает видоизмененную строчку.
+str_replace
+
+6. В имеющемся шаблоне сайта заменить статичное меню (ul - li) на генерируемое через PHP. Необходимо представить пункты меню как элементы массива и вывести их циклом. Подумать, как можно реализовать меню с вложенными подменю? Попробовать его реализовать. ПОПРОБОВАТЬ СДЕЛАТЬ ЧЕРЕЗ ШАБЛОН. Реализация подменю (меню в меню)
+
+
+7.*Вывести с помощью цикла for числа от 0 до 9, НЕ используя тело цикла. Выглядеть это должно так:
+
+for(…){// здесь пусто}
+
+8.*Повторить третье задание, но вывести на экран только города, начинающиеся с буквы «К».
+
+9.*Объединить две ранее написанные функции в одну, которая получает строку на русском языке, производит транслитерацию и замену пробелов на подчеркивания (аналогичная задача решается при конструировании url-адресов на основе названия статьи в блогах). 
+*/
+
+    //include 'first.php';
