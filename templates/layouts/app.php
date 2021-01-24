@@ -27,6 +27,7 @@
                 color: white;
                 height: 10vh;
                 white-space: pre-line;
+                display: flex;
             }
         </style>
     </head>

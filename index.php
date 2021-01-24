@@ -8,9 +8,7 @@ if (isset($_GET['page'])) {
     $page = 'index';
 }
 
-$params = [
-    'year' => date('Y')
-];
+$year = date('Y');
 
 // switch ($page) {
 //     case 'index':
@@ -46,14 +44,18 @@ echo render($page, $params);
 // }
 
 function render($page, $params = []) {
+    global $year;
     return renderTemplate(LAYOUTS_DIR . 'app', [
         'menu' => renderTemplate('menu', $params),
-        'content' => renderTemplate($page, $params)
+        'content' => renderTemplate($page, $params),
+        'year' => $year
     ]);
 }
 
 function renderTemplate($page, $params = []) {
-    extract($params);
+    if ($params) {
+        extract($params);
+    }
 //    foreach ($params as $key => $value) {
 //        $$key = $value;
 //    }
