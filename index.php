@@ -9,45 +9,44 @@ if (isset($_GET['page'])) {
 }
 
 $params = [
-    'count' => 2
+    'year' => date('Y')
 ];
 
-switch ($page) {
-    case 'index':
-        $params['name'] = 'Alex';
-        break;
+// switch ($page) {
+//     case 'index':
+//         $params['name'] = 'Alex';
+//         break;
 
-    case 'catalog':
-        $params['catalog'] = getCatalog();
-        break;
+//     case 'catalog':
+//         $params['catalog'] = getCatalog();
+//         break;
 
-    case 'apicatalog':
-        echo json_encode(getCatalog(), JSON_UNESCAPED_UNICODE);
-        die();
-}
-
+//     case 'apicatalog':
+//         echo json_encode(getCatalog(), JSON_UNESCAPED_UNICODE);
+//         die();
+// }
 
 echo render($page, $params);
 
-function getCatalog() {
-    return [
-        [
-            'name' => 'Пицца',
-            'price' => 24
-        ],
-        [
-            'name' => 'Чай',
-            'price' => 1
-        ],
-        [
-            'name' => 'Яблоко',
-            'price' => 12
-        ],
-    ];
-}
+// function getCatalog() {
+//     return [
+//         [
+//             'name' => 'Пицца',
+//             'price' => 24
+//         ],
+//         [
+//             'name' => 'Чай',
+//             'price' => 1
+//         ],
+//         [
+//             'name' => 'Яблоко',
+//             'price' => 12
+//         ],
+//     ];
+// }
 
 function render($page, $params = []) {
-    return renderTemplate(LAYOUTS_DIR . 'main', [
+    return renderTemplate(LAYOUTS_DIR . 'app', [
         'menu' => renderTemplate('menu', $params),
         'content' => renderTemplate($page, $params)
     ]);
