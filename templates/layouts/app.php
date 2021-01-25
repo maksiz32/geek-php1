@@ -18,6 +18,13 @@
                 width: 98vw;
                 margin: 0 auto;
             }
+            nav ul {
+                display: flex;
+                list-style-type: none;
+            }
+            nav li {
+                padding: 5px;
+            }
             h1, h2, footer {
                 margin-top: 15px;
             }
@@ -28,6 +35,7 @@
                 height: 10vh;
                 white-space: pre-line;
                 display: flex;
+                justify-content: center;
             }
         </style>
     </head>
@@ -35,9 +43,9 @@
         <?=$menu?>
         <?=$content?>
         <footer>
-            <p>
+            <div class="year">
                 <?=$year?>
-            </p>
+            </div>
         </footer>
     </body>
 </html>

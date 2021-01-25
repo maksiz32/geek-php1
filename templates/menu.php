@@ -1,52 +1,44 @@
 <?php
     $nav = [
         'ul' => [
-                    [
+            '1' => [
                         'title' => 'Главная',
                         'uri' => '/',
                         'class' => ''
-                    ],
-                    [
-                        'ul' => [
-                            [
+                ],
+            '2' => [
+                    'mainTitle' => 'Практические работы',
+                    'ul' => [
+                        '1' => [
                                 'title' => 'Практическая работа №2',
                                 'uri' => '?page=second',
                                 'class' => ''
                             ],
-                            [
+                        '2' => [
                                 'title' => 'Практическая работа №3',
                                 'uri' => '?page=third',
                                 'class' => ''
                             ]
                         ]
-                    ]
                 ]
-    ];
-    function test($arr1) {
-        foreach ($arr1 as $k => $v) {
-            echo "K: {$k} :: \n\tvv: {$v}\n\t\t";
-            if ($k == 'ul') {
-                test($v);
-            } else {
-                echo "V: {$v}\n\t\t";
+            ]
+        ];
+    function setMenu($arrMenu) {
+        $strOut = '';
+            foreach ($arrMenu as $key => $val) {
+                if ($key == 'ul') {
+                    (isset($arrMenu['mainTitle'])) ? $temp = $arrMenu['mainTitle'] : $temp ='';
+                    return $temp . '<ul>' . setMenu($val) . '</ul>';
+                } else if (isset($val['title'])) {
+                    $strOut .= "<li><a href=\"{$val['uri']}\" class=\"{$val['class']}\">{$val['title']}</a></li>";
+                } else if ($key != 'mainTitle') {
+                    $strOut .= '<li>' . setMenu($val) . '</li>';
+                }
             }
+        return $strOut;
         }
-    }
-    test($nav);
-    var_dump($nav);
-    exit;
-    // function setMenu($arrMenu) {
-    //     $strOut = '';
-    //         foreach ($arrMenu as $key => $val) {
-    //             if ($key == 'ul') {
-    //                 return '<ul>' . setMenu($val) . '</ul>';
-    //             } else {
-    //                 $strOut .= "<li>";
-    //                 ($val != 'ul') ? $strOut .= "<a href=\"".$key['title']."\" class=\"{$key['class']}\">{$key['uri']}</a>" : setMenu($val);
-    //                 $strOut .= "</li>";
-    //             }
-    //         }
-    //     return $strOut;
-    // }
-    // setMenu($nav)
+    // echo setMenu($nav)
 ?>
+<nav>
+    <?=setMenu($nav)?>
+</nav>
