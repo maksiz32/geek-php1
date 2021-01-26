@@ -2,10 +2,11 @@
 #1
     $out1 = '';
     $i = 0;
-    while ($i++ <= 100) {
+    while ($i <= 100) {
         if ($i % 3 === 0) {
             $out1 .= $i . "<br>";
         }
+        $i++;
     }
     // echo $out1;
 #2
@@ -17,7 +18,8 @@
         } else {
             ($n % 2 === 0) ? $out2 .= $n . " - чётное число.<br>" : $out2 .= $n . " - нечётное число.<br>";
         }
-    } while (++$n <= 10);
+        $n++;
+    } while ($n <= 10);
     // echo $out2;
 #3
     $arr3 = [
@@ -28,29 +30,19 @@
             'Санкт-Петербург', 'Всеволожск', 'Павловск', 'Кронштадт'
         ],
         'Брянская область' => [
-            'Брянск', 'Новозыбков', 'Клинцы', 'Жуковка'
+            'Брянск', 'Новозыбков', 'Клинцы', 'Жуковка', 'Комаричи'
         ],
         'Калужская область' => [
             'Калуга', 'Обнинск', 'Жиздра'
         ]
     ];
     function regionsRus($arr, $countV = 0) {
+        $strOut3 = '';
         foreach ($arr as $key => $val) {
-            if (!is_int($key)){
-                echo "<strong>{$key}:</strong><br>";
-            }
-                if (is_array($val)) {
-                    $count = count($val);
-                    regionsRus($val, $count);
-                } else {
-                    echo $val;
-                    if (--$countV > 0) {
-                        echo ', ';
-                    } else {
-                        echo '<br><br>';
-                    }
-                }
+            $strOut3 .= "<strong>{$key}:</strong><br>";
+            $strOut3 .= implode(', ', $val)."<br><br>";
         }
+        return $strOut3;
     }
     // regionsRus($arr3);
 #4
@@ -66,20 +58,16 @@
             'ф' => 'f',   'х' => 'h',   'ц' => 'ts',
             'ч' => 'ch',  'ш' => 'sh',  'щ' => 'sch',
             'ь' => '\'',  'ы' => 'y',   'ъ' => '\'',
-            'э' => 'e',   'ю' => 'yu',  'я' => 'ya', " " => " "
+            'э' => 'e',   'ю' => 'yu',  'я' => 'ya'
             ];
-        $out4 = '';
-        $lowCase = false;
-        $len = mb_strlen($strIn);
-        for ($i = 0; $i < $len; $i++) {
-            $st = mb_substr($strIn, $i, 1);
-            if ($st === mb_strtoupper($st)) {
-                $lowCase = true;
-            }
-            ($lowCase) ? $out4 .= mb_strtoupper($alfabet[mb_strtolower($st)]) : $out4 .= $alfabet[$st];
-            $lowCase = false;
+        /*
+        if ($strIn === mb_strtoupper($strIn)) {
+            Запомнить в массив номера позиций заглавных букв
         }
-        return $out4;
+            После преобразования, сделать mb_strtoupper этих позиций
+            */
+        $res = strtr($strIn, $alfabet);
+        return $res;
     }
     // translite('Написать функцию, которая заменяет в строке пробелы на подчеркивания и возвращает видоизмененную строчку');
 #5
@@ -88,7 +76,7 @@
     }
     // spaceReplace('Написать функцию, которая заменяет в строке пробелы на подчеркивания и возвращает видоизмененную строчку');
 #7
-    //for ($i = 0; $i < 10; print $i++) {}
+    //for ($i = 0; $i <= 9; print $i++) {}
 #8
     function regionsRusK($arr, $countV = 0) {
         foreach ($arr as $key => $val) {
@@ -105,7 +93,9 @@
     }
     // regionsRusK($arr3);
 #9
-// spaceReplace(translite('Написать функцию, которая заменяет в строке пробелы на подчеркивания и возвращает видоизмененную строчку'));
+    function spaceTranslite($str) {
+        return spaceReplace(translite($str));
+    }
 ?>
 
 <div class="main">
@@ -136,7 +126,7 @@
             </p>
         <h2>Задание 7:</h2>
             <p>
-                <?php for ($i = 0; $i < 10; print $i++) {}?>
+                <?php for ($i = 0; $i <= 9; print $i++) {}?>
             </p>
         <h2>Задание 8:</h2>
             <p>
@@ -144,6 +134,6 @@
             </p>
         <h2>Задание 9:</h2>
             <p>
-                <?=spaceReplace(translite('Написать функцию, которая заменяет в строке пробелы на подчеркивания и возвращает видоизмененную строчку'))?>
+                <?=spaceTranslite('Написать функцию, которая заменяет в строке пробелы на подчеркивания и возвращает видоизмененную строчку')?>
             </p>
 </div>
