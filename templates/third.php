@@ -60,13 +60,7 @@
             'ь' => '\'',  'ы' => 'y',   'ъ' => '\'',
             'э' => 'e',   'ю' => 'yu',  'я' => 'ya'
             ];
-        /*
-        if ($strIn === mb_strtoupper($strIn)) {
-            Запомнить в массив номера позиций заглавных букв
-        }
-            После преобразования, сделать mb_strtoupper этих позиций
-            */
-        $res = strtr($strIn, $alfabet);
+        $res = strtr(mb_strtolower($strIn), $alfabet);
         return $res;
     }
     // translite('Написать функцию, которая заменяет в строке пробелы на подчеркивания и возвращает видоизмененную строчку');
@@ -78,18 +72,18 @@
 #7
     //for ($i = 0; $i <= 9; print $i++) {}
 #8
-    function regionsRusK($arr, $countV = 0) {
+    function regionsRusK($arr) {
+        $strOut8 = '';
         foreach ($arr as $key => $val) {
-            if (!is_int($key)){
-                echo "<strong>{$key}:</strong><br>";
+            $arrVal = [];
+            $strOut8 .= "<strong>{$key}:</strong><br>";
+            for ($i = 0; $i < count($val); $i++) {
+                if (mb_substr($val[$i], 0, 1) == "К")
+                array_push($arrVal, $val[$i]);
             }
-            if (is_array($val)) {
-                $count = count($val);
-                regionsRusK($val, $count);
-            } else if (mb_strtoupper(mb_substr($val, 0, 1)) == 'К') {
-                echo $val . '<br>';
-            }
+            $strOut8 .= implode(', ', $arrVal) . "<br><br>";
         }
+        return $strOut8;
     }
     // regionsRusK($arr3);
 #9
