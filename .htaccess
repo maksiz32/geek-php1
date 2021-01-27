@@ -1,13 +1,5 @@
-RewriteBase /
-AddDefaultCharset Off
-Options -Indexes
-<IfModule dir_module>
-    DirectoryIndex index.php
+php_value date.timezone 'Europe/Moscow'
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
-
-Options All -Indexes
-
-<Files .htaccess>
-order allow,deny
-deny from all
-</Files>

@@ -28,6 +28,14 @@
             h1, h2, footer {
                 margin-top: 15px;
             }
+            .gallery {
+                display: flex;
+                flex-flow: wrap;
+                justify-content: space-around;
+            }
+            .gallery img {
+                margin: 5px;
+            }
             footer {
                 text-align: center;
                 background-color: grey;
@@ -40,8 +48,10 @@
         </style>
     </head>
     <body>
-        <?=$menu?>
-        <?=$content?>
+        <nav>
+            <?=$menu?>
+        </nav>
+            <?=$content?>
         <footer>
             <div class="year">
                 <?=$year?>
