@@ -23,7 +23,7 @@ switch ($page) {
 
     case 'gallery':
         if (!empty($_FILES)) {
-            upload();
+            //upload();
         }
         $params['images'] = getGallery();
         break;
