@@ -26,6 +26,10 @@ $separator = DIRECTORY_SEPARATOR;
                     'uri' => "/?page=exersices{$separator}fourth"
                 ]
                 ]
+        ],
+        [
+            'title' => "Корзина ({$count})",
+            'uri' => '#'
         ]
     ];
 

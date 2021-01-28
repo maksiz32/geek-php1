@@ -43,15 +43,54 @@ $messages = [
     }
     $message = $messages[$_GET['message']];
 ?>
-<h2>Галерея</h2>
-    <div><?=$message?></div>
+<div class="titlePage">
+    <h2>Галерея</h2>
+        <div><?=$message?></div>
+</div>
 <div class="gallery">
     <?php if (isset($images)):
+        $i = 1;
         foreach ($images as $image): ?>
-        <img src='/img/gallery/tmb/<?=$image?>' width="150" alt="">
-    <?php endforeach;
-    endif; ?>
+            <a href="#modal-<?=$i?>" name="modal-<?=$i?>"><img src='/img/gallery/tmb/<?=$image?>' width="150" alt=""></a>
+            <!-- #customize - здесь будет располагаться модальное окно -->
+                <div id="modal-<?=$i?>" class="modalwindow">
+                <!-- Заголовок модального окна -->
+                <h2>Простое jQuery модальное окно</h2>
+                <!-- кнопка закрытия окна определяется как класс close -->
+                <a href="#" class="close">X</a>
+                    <div class="content">
+                        <img src='/img/gallery/<?=$image?>' width="400" alt="">
+                    </div>
+                </div>
+    <?php $i++;
+        endforeach;
+        endif; ?>
+
 </div>
+<script>
+    //выбираем все теги с именем  modal
+$('a[name^="modal-"]').click(function(e) {
+    //Отменяем поведение ссылки
+    e.preventDefault();
+    //Получаем тег A
+    var id = $(this).attr('href');
+    console.log(id);
+    //Получаем ширину и высоту окна
+    var winH = $(window).height();
+    var winW = $(window).width();
+    //Устанавливаем всплывающее окно по центру
+    $(id).css('top', winH/2-$(id).height()/2);
+    $(id).css('left', winW/2-$(id).width()/2);
+    //эффект перехода
+    $(id).fadeIn(500);
+});
+//если нажата кнопка закрытия окна
+$('.modalwindow .close').click(function (e) {
+    //Отменяем поведение ссылки
+    e.preventDefault();
+    $('.modalwindow').fadeOut(500);
+});
+</script>
 <form action="" method="post" enctype="multipart/form-data">
     <label>Загрузка файла:</label>
     <div>
