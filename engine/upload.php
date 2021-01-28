@@ -9,6 +9,7 @@
         }
         //Проверка на разрешенные mime-типы
         $imageinfo = getimagesize($_FILES['myfile']['tmp_name']);
+        // _log($imageinfo, 'imginfo-upload');
         $valid_types = array('image/gif', 'image/jpeg', 'image/png', 'image/bmp');
         if (!in_array($imageinfo['mime'],  $valid_types)) {
             header("Location: /?page=gallery&message=nonMime");
