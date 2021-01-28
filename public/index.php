@@ -1,5 +1,4 @@
 <?php
-
 //Подключение файла с настройками движка
 include "../config/config.php";
 
@@ -17,20 +16,30 @@ $params = [
 ];
 switch ($page) {
 
-    case 'catalog':
-        $params['catalog'] = getCatalog();
-        break;
+    // case 'catalog':
+    //     $params['catalog'] = getCatalog();
+    //     break;
 
     case 'gallery':
+        //Если форма передает файл,- запустить /engine/upload.php для валидации и загрузки
         if (!empty($_FILES)) {
-            //upload();
+            upload();
         }
+        //Коды ошибок при загрузке файлов
+        $messages = [
+            'ok' => 'Файл заружен',
+            'error' => 'Ошибка загрузки',
+            'nonSize' => 'Файл не должен быть больше 5Мб',
+            'nonMime' => 'Можно загружать только изображения'
+        ];
+        //Переменная с текстом ошибки
+        $params['message'] = $messages[$_GET['message']];
         $params['images'] = getGallery();
         break;
 
-    case 'apicatalog':
-        echo json_encode(getCatalog(), JSON_UNESCAPED_UNICODE);
-        die();
+    // case 'apicatalog':
+    //     echo json_encode(getCatalog(), JSON_UNESCAPED_UNICODE);
+    //     die();
 }
 
 //_log($params, "render");

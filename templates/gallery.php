@@ -1,48 +1,3 @@
-<?php
-$messages = [
-    'ok' => 'Файл заружен',
-    'error' => 'Ошибка загрузки',
-    'nonSize' => 'Файл не должен быть больше 5Мб',
-    'nonMime' => 'Можно загружать только изображения'
-];
-    if (!empty($_FILES['myfile']) && is_uploaded_file($_FILES['myfile']['tmp_name'])) {
-        $max_size = 1024*1024*5;
-        if($_FILES["myfile"]["size"] > $max_size) {
-            header("Location: /?page=gallery&message=nonSize");
-            exit;
-        }
-        $imageinfo = getimagesize($_FILES['myfile']['tmp_name']);
-        $valid_types = array('image/gif', 'image/jpeg', 'image/png', 'image/bmp');
-        if (in_array($imageinfo[2],  $valid_types)) {
-            header("Location: /?page=gallery&message=nonMime");
-            exit;
-        }
-
-        include(DIR_ROOT . '/engine/classSimpleImage.php');
-        $uploadpath = DIR_ROOT . '/public/img/gallery/' . uniqid();
-        $ext = pathinfo($_FILES['myfile']['name'])['extension'];
-        $uploadpath = $uploadpath . '.' . $ext;
-        if (move_uploaded_file($_FILES['myfile']['tmp_name'], $uploadpath)) {
-
-            // сделать ресайз файла $path, и сохранить его в small
-            $image = new SimpleImage();
-            $image->load($uploadpath);
-            $image->resizeToWidth(150);
-            $path = explode('/', $uploadpath);
-            $tempArr = $path[count($path) - 1];
-            $path[count($path) - 1] = 'tmb';
-            $path[] = $tempArr;
-            $small_file = implode('/', $path);
-            $image->save($small_file);
-
-            header("Location: /?page=gallery&message=ok");
-        } else {
-            // _log($uploadpath, "upload");
-            header("Location: /?page=gallery&message=error");
-        }
-    }
-    $message = $messages[$_GET['message']];
-?>
 <div class="titlePage">
     <h2>Галерея</h2>
         <div><?=$message?></div>
@@ -55,11 +10,11 @@ $messages = [
             <!-- #customize - здесь будет располагаться модальное окно -->
                 <div id="modal-<?=$i?>" class="modalwindow">
                 <!-- Заголовок модального окна -->
-                <h2>Простое jQuery модальное окно</h2>
+                <h2><?=$image?></h2>
                 <!-- кнопка закрытия окна определяется как класс close -->
                 <a href="#" class="close">X</a>
                     <div class="content">
-                        <img src='/img/gallery/<?=$image?>' width="400" alt="">
+                        <img src='/img/gallery/<?=$image?>' width="350" alt="">
                     </div>
                 </div>
     <?php $i++;

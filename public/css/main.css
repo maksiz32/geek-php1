@@ -42,18 +42,11 @@ h1, h2, footer {
 }
 
 .gallery {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: (150px)[auto-fit];
-      grid-template-columns: repeat(auto-fit, 150px);
-  grid-gap: 15px;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
   text-align: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin: 20px 0;
+  margin: 20px;
 }
 
 .gallery img {
@@ -100,6 +93,7 @@ form + input {
   -webkit-box-shadow: 0 8px 6px -6px black;
   box-shadow: 0 8px 6px -6px black;
   border-radius: 10px;
+  opacity: 0.6;
 }
 
 .modalwindow h2 {

@@ -2,6 +2,7 @@
 //Функция, возвращает текст шаблона $page с подстановкой переменных
 //из массива $params, содержимое шабона $page подставляется в
 //переменную $content главного шаблона layout для всех страниц
+//переменная $year для футера
 function render($page, $params = []) {
     $year = date('Y');
     return renderTemplate(LAYOUTS_DIR . 'app', [
