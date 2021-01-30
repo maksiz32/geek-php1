@@ -8,3 +8,4 @@ include "../engine/catalog.php";
 include "../engine/gallery.php";
 include "../engine/log.php";
 include "../engine/upload.php";
+include "../engine/classSimpleImage.php";

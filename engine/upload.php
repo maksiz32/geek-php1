@@ -1,6 +1,6 @@
 <?php
+function upload() {
     if (!empty($_FILES['myfile']) && is_uploaded_file($_FILES['myfile']['tmp_name'])) {
-        include(DIR_ROOT . '/engine/classSimpleImage.php');
         $max_size = 1024*1024*5;
         //Проверка на загрузку не более 5Мб
         if($_FILES["myfile"]["size"] > $max_size) {
@@ -16,7 +16,7 @@
             die();
         }
         //Переименование загруженного файла
-        $uploadpath = DIR_ROOT . '/public/img/gallery/' . uniqid();
+        $uploadpath = DIR_ROOT . '/img/gallery/' . uniqid();
         $ext = pathinfo($_FILES['myfile']['name'])['extension'];
         $uploadpath = $uploadpath . '.' . $ext;
         if (move_uploaded_file($_FILES['myfile']['tmp_name'], $uploadpath)) {
@@ -35,4 +35,4 @@
             header("Location: /?page=gallery&message=error");
         }
     }
-    
+}

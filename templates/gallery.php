@@ -4,11 +4,10 @@
 </div>
 <div class="gallery">
     <?php if (isset($images)):
-        $i = 1;
-        foreach ($images as $image): ?>
-            <a href="#modal-<?=$i?>" name="modal-<?=$i?>"><img src='/img/gallery/tmb/<?=$image?>' width="150" alt=""></a>
+        foreach ($images as $key => $image): ?>
+            <a href="#modal-<?=$key?>" name="modal-<?=$key?>"><img src='/img/gallery/tmb/<?=$image?>' width="150" alt=""></a>
             <!-- #customize - здесь будет располагаться модальное окно -->
-                <div id="modal-<?=$i?>" class="modalwindow">
+                <div id="modal-<?=$key?>" class="modalwindow">
                 <!-- Заголовок модального окна -->
                 <h2><?=$image?></h2>
                 <!-- кнопка закрытия окна определяется как класс close -->
@@ -17,8 +16,7 @@
                         <img src='/img/gallery/<?=$image?>' width="350" alt="">
                     </div>
                 </div>
-    <?php $i++;
-        endforeach;
+    <?php endforeach;
         endif; ?>
 
 </div>
