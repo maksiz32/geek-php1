@@ -1,44 +1,54 @@
 <?php
+$separator = DIRECTORY_SEPARATOR;
     $nav = [
-        'ul' => [
-            '1' => [
-                        'title' => 'Главная',
-                        'uri' => '/',
-                        'class' => ''
+        [
+            'title' => 'Главная',
+            'uri' => '/'
+        ],
+        [
+            'title' => 'Галерея',
+            'uri' => '/?page=gallery'
+        ],
+        [
+            'title' => 'Практические работы',
+            'uri' => '#',
+            'subitems' => [
+                [
+                    'title' => 'Практическая работа №2',
+                    'uri' => "/?page=exersices{$separator}second"
                 ],
-            '2' => [
-                    'mainTitle' => 'Практические работы',
-                    'ul' => [
-                        '1' => [
-                                'title' => 'Практическая работа №2',
-                                'uri' => '?page=second',
-                                'class' => ''
-                            ],
-                        '2' => [
-                                'title' => 'Практическая работа №3',
-                                'uri' => '?page=third',
-                                'class' => ''
-                            ]
-                        ]
+                [
+                    'title' => 'Практическая работа №3',
+                    'uri' => "/?page=exersices{$separator}third"
+                ],
+                [
+                    'title' => 'Практическая работа №4',
+                    'uri' => "/?page=exersices{$separator}fourth"
                 ]
-            ]
-        ];
+                ]
+        ],
+        [
+            'title' => "Корзина ({$count})",
+            'uri' => '#'
+        ]
+    ];
+
+    $strOut = "<ul>";
+    $strOut .= setMenu($nav);
+    $strOut .= "</ul>";
+
+    echo $strOut;
+
     function setMenu($arrMenu) {
         $strOut = '';
-            foreach ($arrMenu as $key => $val) {
-                if ($key == 'ul') {
-                    (isset($arrMenu['mainTitle'])) ? $temp = $arrMenu['mainTitle'] : $temp ='';
-                    return $temp . '<ul>' . setMenu($val) . '</ul>';
-                } else if (isset($val['title'])) {
-                    $strOut .= "<li><a href=\"{$val['uri']}\" class=\"{$val['class']}\">{$val['title']}</a></li>";
-                } else if ($key != 'mainTitle') {
-                    $strOut .= '<li>' . setMenu($val) . '</li>';
+            foreach ($arrMenu as $key) {
+                $strOut .= "<li><a href=\"{$key['uri']}\">{$key['title']}</a>";
+                if (isset($key['subitems'])) {
+                    $strOut .= "<ul>";
+                    $strOut .= setMenu($key['subitems']);
+                    $strOut .= "</ul>";
                 }
+                $strOut .= "</li>";
             }
         return $strOut;
-        }
-    // echo setMenu($nav)
-?>
-<nav>
-    <?=setMenu($nav)?>
-</nav>
+    }
