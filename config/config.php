@@ -1,11 +1,18 @@
 <?php
+define('ROOT', dirname(__DIR__));
 define('TEMPLATES_DIR', '../templates/');
 define('LAYOUTS_DIR', 'layouts/');
 define('DIR_ROOT', $_SERVER['DOCUMENT_ROOT']);
 
-include "../engine/functions.php";
-include "../engine/catalog.php";
-include "../engine/gallery.php";
-include "../engine/log.php";
-include "../engine/upload.php";
-include "../engine/classSimpleImage.php";
+define('DB_HOST', 'localhost');
+define('DB_PORT', '3306');
+define('DB_DATABASE', '');
+define('DB_USERNAME', '');
+define('DB_PASSWORD', '');
+
+include ROOT . "/engine/db_connections.php";
+include ROOT . "/engine/functions.php";
+include ROOT . "/engine/catalog.php";
+include ROOT . "/engine/gallery.php";
+include ROOT . "/engine/classSimpleImage.php";
+include ROOT . "/engine/log.php";

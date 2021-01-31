@@ -10,7 +10,6 @@ if (isset($_GET['page'])) {
 }
 
 //Для каждой страницы готовим массив со своим набором переменных
-//для подстановки их в соотвествующий шаблон
 $params = [
     'count' => 2
 ];
@@ -21,9 +20,9 @@ switch ($page) {
     //     break;
 
     case 'gallery':
-        //Если форма передает файл,- запустить для валидации и загрузки
+        $site_gallery = DIR_ROOT . '/img/gallery';
         if (!empty($_FILES)) {
-            upload();
+            uploadImg();
         }
         //Коды ошибок при загрузке файлов
         $messages = [
@@ -32,9 +31,8 @@ switch ($page) {
             'nonSize' => 'Файл не должен быть больше 5Мб',
             'nonMime' => 'Можно загружать только изображения'
         ];
-        //Переменная с текстом ошибки
         $params['message'] = $messages[$_GET['message']];
-        $params['images'] = getGallery();
+        $params['images'] = getGallery($site_gallery);
         break;
 
     // case 'apicatalog':

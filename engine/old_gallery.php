@@ -1,5 +1,15 @@
 <?php
-function upload() {
+function getGallery($site_gallery) {
+    $avalableEx = ['jpg', 'jpeg', 'bmp', 'gif', 'png'];
+    foreach (new DirectoryIterator($site_gallery) as $file) {
+        if ($file->isFile() && (in_array($file->getExtension(), $avalableEx))) {
+            $galleryRequest[] = $file->getFilename();
+        }
+    }
+    return $galleryRequest;
+}
+
+function uploadImg() {
     if (!empty($_FILES['myfile']) && is_uploaded_file($_FILES['myfile']['tmp_name'])) {
         $max_size = 1024*1024*5;
         //Проверка на загрузку не более 5Мб
