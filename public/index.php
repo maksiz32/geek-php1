@@ -2,11 +2,13 @@
 //Подключение файла с настройками движка
 include "../config/config.php";
 
+$url_array = explode('/', $_SERVER['REQUEST_URI']);
+
 //Читаем параметр page из uri, чтобы определить, на какую страницу переходит пользователь, по умолчанию это будет index
-if (isset($_GET['page'])) {
-    $page = $_GET['page'];
-} else {
+if ($url_array[1] == "") {
     $page = 'index';
+} else {
+    $page = $url_array[1];
 }
 
 //Для каждой страницы готовим массив со своим набором переменных
@@ -15,14 +17,16 @@ $params = [
 ];
 switch ($page) {
 
-    // case 'catalog':
-    //     $params['catalog'] = getCatalog();
-    //     break;
-
     case 'gallery':
-        $site_gallery = DIR_ROOT . '/img/gallery';
         if (!empty($_FILES)) {
             uploadImg();
+        }
+
+        //Удаление и изменение здесь может выполнить любой пользователь
+        if (count($url_array) > 3) {
+            $action = $url_array[count($url_array) - 2];
+            $id = $url_array[count($url_array) - 1];
+            $action($id);
         }
         //Коды ошибок при загрузке файлов
         $messages = [
@@ -32,7 +36,17 @@ switch ($page) {
             'nonMime' => 'Можно загружать только изображения'
         ];
         $params['message'] = $messages[$_GET['message']];
-        $params['images'] = getGallery($site_gallery);
+        $params['images'] = getGallery();
+        break;
+
+    case 'onepic':
+        // $id = (int)$_GET['id'];
+        $id = $url_array[2];
+        $params['pic'] = getOnePic($id);
+        break;
+        
+    case 'exersices':
+        $page = implode('/', [$url_array[1], $url_array[2]]);
         break;
 
     // case 'apicatalog':

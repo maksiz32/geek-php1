@@ -6,9 +6,9 @@ define('DIR_ROOT', $_SERVER['DOCUMENT_ROOT']);
 
 define('DB_HOST', 'localhost');
 define('DB_PORT', '3306');
-define('DB_DATABASE', '');
-define('DB_USERNAME', '');
-define('DB_PASSWORD', '');
+define('DB_DATABASE', 'site');
+define('DB_USERNAME', 'site');
+define('DB_PASSWORD', '12345');
 
 include ROOT . "/engine/db_connections.php";
 include ROOT . "/engine/functions.php";

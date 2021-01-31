@@ -1,5 +1,5 @@
 <?php
-$separator = DIRECTORY_SEPARATOR;
+// $separator = DIRECTORY_SEPARATOR;
     $nav = [
         [
             'title' => 'Главная',
@@ -7,7 +7,7 @@ $separator = DIRECTORY_SEPARATOR;
         ],
         [
             'title' => 'Галерея',
-            'uri' => '/?page=gallery'
+            'uri' => '/gallery'
         ],
         [
             'title' => 'Практические работы',
@@ -15,15 +15,19 @@ $separator = DIRECTORY_SEPARATOR;
             'subitems' => [
                 [
                     'title' => 'Практическая работа №2',
-                    'uri' => "/?page=exersices{$separator}second"
+                    'uri' => "/exersices/second"
                 ],
                 [
                     'title' => 'Практическая работа №3',
-                    'uri' => "/?page=exersices{$separator}third"
+                    'uri' => "/exersices/third"
                 ],
                 [
                     'title' => 'Практическая работа №4',
-                    'uri' => "/?page=exersices{$separator}fourth"
+                    'uri' => "/exersices/fourth"
+                ],
+                [
+                    'title' => 'Практическая работа №5',
+                    'uri' => "/exersices/fifth"
                 ]
                 ]
         ],

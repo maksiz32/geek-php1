@@ -18,6 +18,13 @@ nav ul {
 nav li {
     padding: 5px;
 }
+nav li ul {
+    display: none;
+}
+nav li:hover ul {
+    display: block;
+    z-index: 999;
+}
 h1, h2, footer {
     margin-top: 15px;
 }
@@ -28,6 +35,8 @@ h1, h2, footer {
     text-align: center;
     align-items: center;
     margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
 }
 .gallery img {
     margin: 5px;
@@ -36,6 +45,23 @@ h1, h2, footer {
 }
 .gallery img:hover {
     box-shadow: 6px 6px 25px gray;
+}
+.galleryCard {
+    display: grid;
+    margin: 20px;
+}
+.btn-red {
+    text-decoration: none;
+    display:inline-block;
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+}
+.btn-red:hover {
+    background-color: #b30679;
+}
+.bigPic {
+    height: 70vh;
 }
 form {
     margin: 0 auto;

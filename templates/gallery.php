@@ -4,8 +4,11 @@
 </div>
 <div class="gallery">
     <?php if (isset($images)):
-        foreach ($images as $key => $image): ?>
-            <a href="#modal-<?=$key?>" name="modal-<?=$key?>"><img src='/img/gallery/tmb/<?=$image?>' width="150" alt=""></a>
+        foreach ($images as $image): ?>
+        <div class="galleryCard">
+            <a href="/onepic/<?=$image['id']?>" name="modal-<?=$image['id']?>"><img src='/img/gallery/tmb/<?=$image['image']?>' width="150" alt=""></a>
+            <a href="gallery/delete/<?=$image['id']?>" class="btn-red">Удалить</a>
+        </div>
     <?php endforeach;
         endif; ?>
 </div>
