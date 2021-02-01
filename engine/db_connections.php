@@ -7,9 +7,12 @@ function getConnect() {
     return $db;
 }
 
+function closeConnect() {
+    mysqli_close(getConnect());
+}
+
 function getDBRequest($request) {
-    $db = getConnect();
-    $res = @mysqli_query($db, $request) or die(mysqli_error($db));
+    $res = @mysqli_query(getConnect(), $request) or die(mysqli_error($db));
     //В случае неудачи вернет FALSE
     //Для SELECT, SHOW, DESCRIBE или EXPLAIN вернет объект со значениями
     //Для остальных вернет TRUE

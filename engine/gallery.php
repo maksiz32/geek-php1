@@ -1,14 +1,19 @@
 <?php
 function getGallery() {
+    $t = getDBRequest('SELECT * FROM gallery ORDER BY countViews DESC');
     return getDBRequest('SELECT * FROM gallery ORDER BY countViews DESC');
 }
 
-function getOnePic($id) {
-    getDBRequest("UPDATE gallery SET countViews=countViews+1 WHERE id={$id}");
+function getOnePic(int $id) {
+    addLikes($id);
     return getDBRequest("SELECT * FROM gallery WHERE id={$id}")[0];
 }
 
-function delete($id) {
+function addLikes($id) {
+    getDBRequest("UPDATE gallery SET countViews=countViews+1 WHERE id={$id}");
+}
+
+function delete(int $id) {
     return getDBRequest("DELETE FROM gallery WHERE id={$id}");
 }
 
