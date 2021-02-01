@@ -23,7 +23,15 @@ nav li ul {
 }
 nav li:hover ul {
     display: block;
+    position: absolute;
+    background-color: azure;
     z-index: 999;
+}
+nav li ul li a {
+    border-bottom: 1px solid gray;
+}
+nav li ul li:last-of-type a {
+    border-bottom: none;
 }
 h1, h2, footer {
     margin-top: 15px;

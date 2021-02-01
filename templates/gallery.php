@@ -15,6 +15,7 @@
 <form action="" method="post" enctype="multipart/form-data">
     <label>Загрузка файла:</label>
     <div>
+        <input type="hidden" name="MAX_FILE_SIZE" value="5000000" />
         <input type="file" name="myfile" accept="image/*">
         <input type="submit" class="submit" value="Загрузить" name="load">
     </div>

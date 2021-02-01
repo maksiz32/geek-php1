@@ -8,6 +8,10 @@ function getOnePic($id) {
     return getDBRequest("SELECT * FROM gallery WHERE id={$id}")[0];
 }
 
+function delete($id) {
+    return getDBRequest("DELETE FROM gallery WHERE id={$id}");
+}
+
 function uploadImg() {
     if (!empty($_FILES['myfile']) && is_uploaded_file($_FILES['myfile']['tmp_name'])) {
         $max_size = 1024*1024*5;
@@ -35,12 +39,15 @@ function uploadImg() {
             $res = getDBRequest("INSERT INTO gallery (image, size) VALUES ('{$name_file}', {$filesize})");
             if (mb_substr($res, 0, 10) === 'Ваш запрос') {
                 header("Location: /gallery/?message=ok");
+                die();
             } else {
                 header("Location: /gallery/?message=error");
+                die();
             }
         } else {
             // _log($uploadpath, "upload");
             header("Location: /gallery/?message=error");
+            die();
         }
     }
 }

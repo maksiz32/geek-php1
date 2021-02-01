@@ -14,20 +14,15 @@ function getDBRequest($request) {
     //Для SELECT, SHOW, DESCRIBE или EXPLAIN вернет объект со значениями
     //Для остальных вернет TRUE
     if ($res === true) {
-        $row = 'Ваш запрос обработан успешно. Изменено ' . countChanges($db) . ' строк.';
+        $row = true;//bool
     } else if (isset($res->num_rows)) {
-        $row = mysqli_fetch_all($res, MYSQLI_ASSOC);
+        $row = mysqli_fetch_all($res, MYSQLI_ASSOC);//array
     } else {
-        $row = 'Ошибка при выполнении запроса';
+        $row = false;//bool
     }
-    // mysqli_close($db);
     return $row;
 }
 
-function countChanges($reqDB) {
-    return mysqli_affected_rows($reqDB);
-}
-
-function delete($id) {
-    return getDBRequest("DELETE FROM gallery WHERE id={$id}");
+function countChanges() {
+    return mysqli_affected_rows(getConnect());
 }
