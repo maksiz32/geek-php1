@@ -1,6 +1,5 @@
 <?php
 function getGallery() {
-    $t = getDBRequest('SELECT * FROM gallery ORDER BY countViews DESC');
     return getDBRequest('SELECT * FROM gallery ORDER BY countViews DESC');
 }
 

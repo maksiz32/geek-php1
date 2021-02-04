@@ -13,22 +13,26 @@ $nav = [
         'uri' => '#',
         'subitems' => [
             [
-                'title' => 'Практическая работа №2',
-                'uri' => "/exersices/second"
-            ],
-            [
                 'title' => 'Практическая работа №3',
-                'uri' => "/exersices/third"
+                'uri' => "/third"
             ],
             [
                 'title' => 'Практическая работа №4',
-                'uri' => "/exersices/fourth"
+                'uri' => "/fourth"
             ],
             [
                 'title' => 'Практическая работа №5',
-                'uri' => "/exersices/fifth"
+                'uri' => "/fifth"
+            ],
+            [
+                'title' => 'Практическая работа №6',
+                'uri' => "/sixth"
             ]
             ]
+    ],
+    [
+        'title' => "Каталог",
+        'uri' => '/products'
     ],
     [
         'title' => "Корзина ({$count})",
