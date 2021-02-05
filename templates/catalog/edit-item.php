@@ -1,5 +1,10 @@
 <div class="titlePage">
+<?php if (isset($item['id'])):?>
+    <h2>Изменение товара</h2>
+<?php else:?>
     <h2>Добавление товара</h2>
+<?php endif;?>
+    
 </div>
 <?php if(is_array($message)): ?>
     <ol>
@@ -11,7 +16,6 @@
         <p><?=$message ?></p>
 <?php endif; ?>
 <div>
-    <?php if(!isset($noCrud)): ?>
     <form action="" method="post" enctype="multipart/form-data">
         <?php if (isset($item['id'])): ?>
         <input type="hidden" name="id" value='<?php echo $item["id"]?>'>
@@ -20,17 +24,15 @@
         <input type="text" name="name" value='<?php if(isset($item)) echo $item["name"]?>' required>
         <label for="description">Описание</label>
         <input type="text" name="description" value='<?php if(isset($item)) echo $item["description"]?>' required>
-        <?php if (!isset($item['id'])): ?>
         <label for="price">Полное описание</label>
         <textarea rows="2" maxlength="100000" name="more_description"><?php if(isset($item)) echo $item["more_description"]?></textarea>
-        <?php endif; ?>
         <label for="price">Стоимость</label>
         <input type="text" name="price" value='<?php if(isset($item)) echo $item["price"]?>'required>
         <br>
         <?php if (isset($item['id'])):?>
-            <?php if (isset($pics)):?>
+            <?php if (!empty($pics)):?>
             <?php foreach ($pics as $pic):?>
-                <img src="/img/products/tmb/<?=$pic['path']?>">
+                <img src="/img/products/tmb/<?=$pic['image']?>">
             <?php endforeach;?>
             <?php endif;?>
         <?php else:?>
@@ -47,21 +49,4 @@
             <?php endif;?>
         </button>
     </form>
-    <?php else: ?>
-        <div>Название</div>
-        <div><?=$item["name"]?></div>
-        <div>Описание</div>
-        <div><?=$item["description"]?></div>
-        <div>Полное описание</div>
-        <div><?=$item["more_description"]?></div>
-        <div>Стоимость</div>
-        <div><?=$item["price"]?></div>
-        <br>
-            <?php if (isset($pics)):?>
-            <?php foreach ($pics as $pic):?>
-                <img src="/img/products/tmb/<?=$pic['path']?>">
-            <?php endforeach;?>
-            <?php endif;?>
-            <a href="#<?=$item['id']?>" class="btn-green">Изменить</a>
-    <?php endif;?>
 </div>

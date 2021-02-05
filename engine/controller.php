@@ -61,6 +61,31 @@ function prepareVariables($url_array) {
             $params['pictures'] = getPictures();
             break;
 
+        case 'item':
+            $params['page'] = implode('/', ['catalog', $url_array[1]]);
+            if (isset($url_array[4])) {
+                $action = $url_array[3];
+                $idFeed = (int) $url_array[4];
+            }
+            if (empty($_POST['id'])) {
+                addFeedback($_POST);
+            } else {
+                editFeedback($_POST);
+            }
+            if ($action == 'edit') {
+                $params['feed'] = getFeed($idFeed)[0];
+            }
+            if ($action == 'delete') {
+                delFeed($idFeed);
+            }
+            if (isset($url_array[2])) {
+                $id = (int) $url_array[2];
+                $params['item'] = getOneItem('read', $id)[0];
+                $params['feedbacks'] = getFeedbacksById($id);
+                $params['pics'] = getPicturesByProdId($id);
+            }
+            break;
+
         case 'edit-item':
             $params['page'] = implode('/', ['catalog', $url_array[1]]);
             if (!empty($_POST)) {
@@ -78,13 +103,14 @@ function prepareVariables($url_array) {
                         }
                     }
                 } else {
-                    //update
+                    $params['message'] = getOneItem('edit', $_POST['id'], ['name' => $_POST['name'], 'description' => $_POST['description'], 
+                        'more_description' => $_POST['more_description'], 'price' => $_POST['price']]);//update
                 }
             } else if (isset($url_array[2])) {
                 if (!isset($url_array[3])) {
                     $id = (int) $url_array[2];//show
                     $params['item'] = getOneItem('read', $id)[0];
-                    $params['noCrud'] = true;
+                    $params['pics'] = getPicturesByProdId($id);
                 } else {
                     //delete
                 }

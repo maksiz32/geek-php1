@@ -11,9 +11,8 @@
                         <option value="del" <?php if(isset($operation) && $operation == 'del') echo "selected"?>>/</option>
                     </select>
                 <input type="text" name="argS" value='<?php if(isset($argS)) echo $argS?>'>
-                =
+                <button type="submit">=</button>
                 <input type="text" name="summa" value='<?php if(isset($summa)) echo $summa?>' disabled>
-                <button type="submit">Вычислить</button>
             </form>
             </li><br>
             <li>Создать калькулятор, который будет определять тип выбранной пользователем операции, ориентируясь на нажатую кнопку. При желании сделать через ajax</li>

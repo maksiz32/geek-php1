@@ -2,12 +2,12 @@
     <h2>Каталог товаров</h2>
 </div>
 <div>
-    <?php if (isset($products)):
+    <?php if (!empty($products)):
         foreach ($products as $item): ?>
         <div class="galleryCard">
-            <a href="/edit-item/<?=$item['id']?>" style="text-decoration: none;">
+            <a href="/item/<?=$item['id']?>" style="text-decoration: none;">
                 <h3><?=$item['name']?></h3>
-                <?php if(isset($pictures)): ?>
+                <?php if(!empty($pictures)): ?>
                     <?php foreach($pictures as $pic): ?>
                         <?php if($pic['id_products'] == $item['id']): ?>
                             <img src='/img/products/tmb/<?=$pic['image']?>' width="150" alt="">
