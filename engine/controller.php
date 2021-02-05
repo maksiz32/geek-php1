@@ -14,7 +14,7 @@ function prepareVariables($url_array) {
         case 'gallery':
             $params['page'] = implode('/', ['galleries', $url_array[1]]);
             if (!empty($_FILES)) {
-                uploadImg('/img/gallery/');
+                $params['message'] = uploadImg('/img/gallery/', $_FILES['myfile'], 'gallery');
             }
             //Удаление и изменение здесь может выполнить любой пользователь
             if (count($url_array) >= 3) {
@@ -22,14 +22,6 @@ function prepareVariables($url_array) {
                 $id = (int) $url_array[count($url_array) - 1];
                 $action($id);
             }
-            //Коды ошибок при загрузке файлов
-            $messages = [
-                'ok' => 'Файл заружен',
-                'error' => 'Ошибка загрузки',
-                'nonSize' => 'Файл не должен быть больше 5Мб',
-                'nonMime' => 'Можно загружать только изображения'
-            ];
-            $params['message'] = $messages[$_GET['message']];
             $params['images'] = getGallery();
             break;
 
@@ -66,21 +58,33 @@ function prepareVariables($url_array) {
         case 'products':
             $params['page'] = implode('/', ['catalog', $url_array[1]]);
             $params['products'] = getProducts();
+            $params['pictures'] = getPictures();
             break;
 
         case 'edit-item':
             $params['page'] = implode('/', ['catalog', $url_array[1]]);
             if (!empty($_POST)) {
                 if (!isset($url_array[2])) {
-                    //create
+                    $params['message'] = getOneItem('create', null, ['name' => $_POST['name'], 'description' => $_POST['description'], 
+                        'more_description' => $_POST['more_description'], 'price' => $_POST['price']]);//create
                     $id = lastId();
+                    if (!empty($_FILES)) {
+                        $total_files = count($_FILES['pics']['name']);
+                        for($i = 0; $i < $total_files; $i++) {
+                            $source[$i] = ['name' => $_FILES['pics']['name'][$i], 'type' => $_FILES['pics']['type'][$i], 'tmp_name' => $_FILES['pics']['tmp_name'][$i]];
+                            $params['message'] = [uploadImg('/img/products/', $source[$i], 'pictures')];
+                            $idPic = lastId();
+                            addPicureIdItem($idPic, $id);
+                        }
+                    }
                 } else {
                     //update
                 }
             } else if (isset($url_array[2])) {
                 if (!isset($url_array[3])) {
-                    $id = (int) $url_array[2];//
+                    $id = (int) $url_array[2];//show
                     $params['item'] = getOneItem('read', $id)[0];
+                    $params['noCrud'] = true;
                 } else {
                     //delete
                 }

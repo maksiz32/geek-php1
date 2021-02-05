@@ -7,13 +7,16 @@
         <div class="galleryCard">
             <a href="/edit-item/<?=$item['id']?>" style="text-decoration: none;">
                 <h3><?=$item['name']?></h3>
-<!-- 
-                <img src='/img/gallery/tmb/<?=$image['image']?>' width="150" alt="">
-                 -->
+                <?php if(isset($pictures)): ?>
+                    <?php foreach($pictures as $pic): ?>
+                        <?php if($pic['id_products'] == $item['id']): ?>
+                            <img src='/img/products/tmb/<?=$pic['image']?>' width="150" alt="">
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endif; ?>
                 <div><?=$item['description']?></div>
                 <span><?=$item['price']?></span>
             </a>
-            <a href="#" class="btn-green">Изменить</a>
             <a href="#" class="btn-red">Удалить</a>
         </div>
     <?php endforeach;
