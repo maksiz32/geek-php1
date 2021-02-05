@@ -29,3 +29,7 @@ function getDBRequest($request) {
 function countChanges() {
     return mysqli_affected_rows(getConnect());
 }
+
+function lastId() {
+    return mysqli_insert_id(getConnect());
+}

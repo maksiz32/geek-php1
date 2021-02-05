@@ -1,6 +1,6 @@
 <?php
 //Для каждой страницы готовим массив со своим набором переменных
-function prepareVariables($url_array, $action) {
+function prepareVariables($url_array) {
     
     if ($url_array[1] == "") {
         $params['page'] = 'index';
@@ -14,7 +14,7 @@ function prepareVariables($url_array, $action) {
         case 'gallery':
             $params['page'] = implode('/', ['galleries', $url_array[1]]);
             if (!empty($_FILES)) {
-                uploadImg();
+                uploadImg('/img/gallery/');
             }
             //Удаление и изменение здесь может выполнить любой пользователь
             if (count($url_array) >= 3) {
@@ -65,9 +65,26 @@ function prepareVariables($url_array, $action) {
 
         case 'products':
             $params['page'] = implode('/', ['catalog', $url_array[1]]);
+            $params['products'] = getProducts();
             break;
-        case 'item':
+
+        case 'edit-item':
             $params['page'] = implode('/', ['catalog', $url_array[1]]);
+            if (!empty($_POST)) {
+                if (!isset($url_array[2])) {
+                    //create
+                    $id = lastId();
+                } else {
+                    //update
+                }
+            } else if (isset($url_array[2])) {
+                if (!isset($url_array[3])) {
+                    $id = (int) $url_array[2];//
+                    $params['item'] = getOneItem('read', $id)[0];
+                } else {
+                    //delete
+                }
+            }
             break;
 
         // case 'apicatalog':

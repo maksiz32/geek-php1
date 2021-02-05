@@ -28,11 +28,21 @@ $nav = [
                 'title' => 'Практическая работа №6',
                 'uri' => "/sixth"
             ]
-            ]
+        ]
     ],
     [
-        'title' => "Каталог",
-        'uri' => '/products'
+        'title' => "Товары",
+        'uri' => '#',
+        'subitems' => [
+            [
+                'title' => 'Каталог',
+                'uri' => "/products"
+            ],
+            [
+                'title' => 'Добавить в каталог',
+                'uri' => "/edit-item"
+            ]
+        ]
     ],
     [
         'title' => "Корзина ({$count})",

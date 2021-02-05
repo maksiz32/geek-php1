@@ -16,7 +16,7 @@ function delete(int $id) {
     return getDBRequest("DELETE FROM gallery WHERE id={$id}");
 }
 
-function uploadImg() {
+function uploadImg($path) {
     if (!empty($_FILES['myfile']) && is_uploaded_file($_FILES['myfile']['tmp_name'])) {
         $max_size = 1024*1024*5;
         //Проверка на загрузку не более 5Мб
@@ -32,7 +32,7 @@ function uploadImg() {
             die();
         }
         //Переименование загруженного файла
-        $uploadpath = DIR_ROOT . '/img/gallery/';
+        $uploadpath = DIR_ROOT . $path;
         $name_file = uniqid() . "." . pathinfo($_FILES['myfile']['name'])['extension'];;
         if (move_uploaded_file($_FILES['myfile']['tmp_name'], $uploadpath . $name_file)) {
             $filesize = getFileSize($uploadpath . $name_file);

@@ -19,4 +19,5 @@ include ROOT . "/models/catalog.php";
 include ROOT . "/models/gallery.php";
 include ROOT . "/engine/classSimpleImage.php";
 include ROOT . "/models/math.php";
+include ROOT . "/models/products.php";
 include ROOT . "/engine/log.php";

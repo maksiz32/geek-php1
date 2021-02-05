@@ -9,7 +9,7 @@ $url_array = explode('/', $_SERVER['REQUEST_URI']);
     // } else {
     //     $page = $url_array[1];
     // }
-$params = prepareVariables($url_array, $action);
+$params = prepareVariables($url_array);
 if (isset($params['page'])) {
     $page = $params['page'];
     unset($params['page']);
