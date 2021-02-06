@@ -15,7 +15,18 @@
                 <input type="text" name="summa" value='<?php if(isset($summa)) echo $summa?>' disabled>
             </form>
             </li><br>
-            <li>Создать калькулятор, который будет определять тип выбранной пользователем операции, ориентируясь на нажатую кнопку. При желании сделать через ajax</li>
+            <li>Создать калькулятор, который будет определять тип выбранной пользователем операции, ориентируясь на нажатую кнопку. При желании сделать через ajax<br><br>
+            <form action="" method="post">
+                <input type="text" name="argF1" value='<?php if(isset($argF1)) echo $argF1?>'>
+                И
+                <input type="text" name="argS1" value='<?php if(isset($argS1)) echo $argS1?>'>
+                <button type="submit" name="sum">+</button>
+                <button type="submit" name="minus">-</button>
+                <button type="submit" name="mult">*</button>
+                <button type="submit" name="del">/</button>
+                <input type="text" name="summa1" value='<?php if(isset($summa1)) echo $summa1?>' disabled>
+            </form>
+            </li>
             <li>**. Вместо отзывов к сайту сделайте отзывы к товару. На странице с отдельным товаром.</li>
             <li>Создать страницу каталога товаров: ВАЖНО
                 <ul>

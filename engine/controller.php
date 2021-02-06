@@ -45,12 +45,22 @@ function prepareVariables($url_array) {
             break;
         case 'sixth':
             $params['page'] = implode('/', ['exersices', $url_array[1]]);
-            if (!empty($_POST)) {
+            if (!empty($_POST) && isset($_POST['argF'])) {
                 $argF = $_POST['argF'];
                 $argS = $_POST['argS'];
                 $operation = $_POST['operation'];
                 $summa = mathOperation($argF, $argS, $operation);
                 $p = compact('argF', 'argS', 'operation', 'summa');
+                $params = array_merge($params, $p);
+            } else {
+                $arr1 = ['argF1', 'argS1'];
+                $argF1 = $_POST['argF1'];
+                $argS1 = $_POST['argS1'];
+                foreach($_POST as $key => $val) {
+                    if(!in_array($key, $arr1)) $operation1 = $key;
+                }
+                $summa1 = mathOperation($argF1, $argS1, $operation1);
+                $p = compact('argF1', 'argS1', 'operation1', 'summa1');
                 $params = array_merge($params, $p);
             }
             break;
