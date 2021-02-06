@@ -77,9 +77,9 @@ function prepareVariables($url_array) {
                 $action = $url_array[3];
                 $idFeed = (int) $url_array[4];
             }
-            if (empty($_POST['id'])) {
+            if (!empty($_POST) && empty($_POST['id'])) {
                 addFeedback($_POST);
-            } else {
+            } else if (!empty($_POST)) {
                 editFeedback($_POST);
             }
             if ($action == 'edit') {

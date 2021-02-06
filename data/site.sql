@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 06 2021 г., 03:05
+-- Время создания: Фев 06 2021 г., 11:48
 -- Версия сервера: 10.1.30-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -40,34 +40,9 @@ CREATE TABLE `feedbacks` (
 --
 
 INSERT INTO `feedbacks` (`id`, `id_products`, `name`, `feedback`) VALUES
-(1, 1, 'M1', 'sdfgggggggggggggggggb'),
-(2, 1, 'Z22', 'svdfbgbngnnnnnnnnnnnnnn2'),
-(3, 0, '', ''),
-(4, 0, '', ''),
-(5, 0, '', ''),
-(10, 0, '', ''),
-(11, 0, '', ''),
-(12, 0, '', ''),
-(13, 0, '', ''),
-(14, 0, '', ''),
-(15, 0, '', ''),
-(16, 0, '', ''),
-(17, 0, '', ''),
-(18, 0, '', ''),
-(19, 0, '', ''),
-(20, 0, '', ''),
-(21, 0, '', ''),
-(22, 0, '', ''),
-(23, 1, '3', '3333333333 3333333'),
-(24, 0, '', ''),
-(25, 0, '', ''),
-(26, 0, '', ''),
-(27, 0, '', ''),
-(28, 0, '', ''),
-(29, 0, '', ''),
-(30, 0, '', ''),
-(31, 0, '', ''),
-(32, 0, '', '');
+(2, 1, 'M', 'kbkbjkbb bjkb jb jk kjk'),
+(3, 1, '3', 'jhghgj khjjk jkhjk hk kjh khkj'),
+(5, 2, 'M1', 'hbk gj gjujhjkhkjhhkjhkj jhjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjj jiutfdddddddddddddddddd');
 
 -- --------------------------------------------------------
 
@@ -179,13 +154,13 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT для таблицы `feedbacks`
 --
 ALTER TABLE `feedbacks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT для таблицы `gallery`
 --
 ALTER TABLE `gallery`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `pictures`
