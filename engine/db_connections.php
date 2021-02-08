@@ -7,12 +7,10 @@ function getConnect() {
     return $db;
 }
 
-function closeConnect() {
-    mysqli_close(getConnect());
-}
-
 function getDBRequest($request) {
-    $res = @mysqli_query(getConnect(), $request) or die(mysqli_error($db));
+    // var_dump($request);
+    // die();
+    $res = @mysqli_query(getConnect(), $request) or die(mysqli_error(getConnect()));
     //В случае неудачи вернет FALSE
     //Для SELECT, SHOW, DESCRIBE или EXPLAIN вернет объект со значениями
     //Для остальных вернет TRUE
@@ -28,4 +26,12 @@ function getDBRequest($request) {
 
 function countChanges() {
     return mysqli_affected_rows(getConnect());
+}
+
+function lastId() {
+    return mysqli_insert_id(getConnect());
+}
+
+function closeConnect() {
+    mysqli_close(getConnect());
 }

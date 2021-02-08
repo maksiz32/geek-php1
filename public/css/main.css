@@ -22,6 +22,23 @@ body {
   margin: 0 auto;
 }
 
+nav {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.n-auth {
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.b-auth {
+  padding-left: 5px;
+}
+
 nav ul {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -97,6 +114,25 @@ h1, h2, footer {
   background-color: red;
   color: white;
   border-radius: 5px;
+  text-align: center;
+}
+
+.btn-green {
+  text-decoration: none;
+  display: inline-block;
+  background-color: green;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.btn-blue {
+  text-decoration: none;
+  display: inline-block;
+  background-color: blue;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .btn-red:hover {
