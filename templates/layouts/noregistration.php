@@ -10,7 +10,6 @@
     <body>
         <nav>
             <?=$menu?>
-            <?=$auth?>
         </nav>
             <?=$content?>
         <footer>

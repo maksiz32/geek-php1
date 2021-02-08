@@ -11,6 +11,16 @@ body {
     width: 98vw;
     margin: 0 auto;
 }
+nav {
+    display: flex;
+}
+.n-auth {
+    padding: 5px;
+    display: flex;
+}
+.b-auth {
+    padding-left: 5px;
+}
 nav ul {
     display: flex;
     list-style-type: none;

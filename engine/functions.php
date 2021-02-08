@@ -7,7 +7,8 @@
 function render($page, $params) {
     $year = date('Y');
     return renderTemplate(LAYOUTS_DIR . $params['layout'], [
-        'menu' => renderTemplate('menu', $params),
+        'menu' => renderTemplate('/layouts/menu', $params),
+        'auth' => renderTemplate('/layouts/auth', $params),
         'content' => renderTemplate($page, $params),
         'year' => $year
     ]);

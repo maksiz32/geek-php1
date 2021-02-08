@@ -26,7 +26,17 @@
                 <button type="submit" name="del">/</button>
                 <input type="text" name="summa1" value='<?php if(isset($summa1)) echo $summa1?>' disabled>
             </form>
-            </li>
+            </li><br>
+            <!-- <li>Создать калькулятор ajax<br><br>
+                <input type="text" name="argF2" id="argF2">
+                И
+                <input type="text" name="argS2" id="argS2">
+                <button type="submit" id="start" name="sum">+</button>
+                <button type="submit" id="start" name="minus">-</button>
+                <button type="submit" id="start" name="mult">*</button>
+                <button type="submit" id="start" name="del">/</button>
+                <input type="text" name="summa2" id="summa2" disabled>
+            </li> -->
             <li>**. Вместо отзывов к сайту сделайте отзывы к товару. На странице с отдельным товаром.</li>
             <li>Создать страницу каталога товаров: ВАЖНО
                 <ul>
@@ -39,4 +49,29 @@
             </li>
         <li>*Написать CRUD-блок для управления выбранным модулем через единую функцию (doFeedbackAction()).</li>
         </ol>
+<!-- <script>
+    window.onload = function () {
+        document.getElementById('start').onclick = function () {
+            (async () => {
+                const response = await fetch('apicalc', {
+                    method: 'POST',
+                    headers: //{
+                    //     'Content-Type': 'application/x-www-form-urlencoded'
+                    // },
+                    new Headers({
+                        'Content-Type': 'application/json'
+                    }),
+                    body: JSON.stringify({
+                        op1: '2',
+                        op2: '2',
+                        opType: 'sum'
+                    }),
+
+                });
+                const answer = await response.json();
+                console.log(answer);
+            })();
+        }
+    }
+</script> -->
 </div>

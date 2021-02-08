@@ -21,4 +21,6 @@ include ROOT . "/engine/classSimpleImage.php";
 include ROOT . "/models/math.php";
 include ROOT . "/models/products.php";
 include ROOT . "/models/feedbacks.php";
+include ROOT . "/models/users.php";
+include ROOT . "/engine/jcalc.php";
 include ROOT . "/engine/log.php";

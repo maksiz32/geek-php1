@@ -2,6 +2,7 @@
     <h2>Просмотр</h2>
 </div>
 <div>
+    <?php if(!empty($item['name'])): ?>
     <h3>Название:</h3>
         <div><?=$item["name"]?></div>
     <h3>Описание:</h3>
@@ -59,4 +60,7 @@
             <div>Об этом товаре еще нет отзывов</div>
         <?php endif; ?>
     </p>
+    <?php else: ?>
+    <div>Такого товара не существует</div>
+    <?php endif; ?>
 </div>
