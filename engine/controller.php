@@ -135,9 +135,30 @@ function prepareVariables($url_array) {
             // $params['page'] = implode('/', ['basket', $url_array[1]]);
             $baskId = $url_array[2];
             delFromBaskById($baskId);
-            
             header('Location: /basket');
             die();
+        case 'submbuy':
+            $params['page'] = implode('/', ['basket', $url_array[1]]);
+            break;
+        case 'buyall':
+            session_start();
+            $sessionId = session_id();
+            subBuy($sessionId, $_POST['phone']);
+            session_regenerate_id();
+            header('Location: /');
+            die();
+        case 'allbuyers':
+            if (is_admin($_SESSION['username'])) {
+                $params['page'] = implode('/', ['admin', $url_array[1]]);
+                session_start();
+                $sessionId = session_id();
+                $params['phones'] = getPhone(secUser($sessionId));
+                break;
+            } else {
+            header('Location: /');
+            die();
+            }
+
         case 'register':
             $params['layout'] = 'noregistration';
             break;

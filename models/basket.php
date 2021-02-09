@@ -12,3 +12,11 @@ function allProductsBySessionId($sessionId) {
 function delFromBaskById($baskId) {
     return getDBRequest("DELETE FROM basket WHERE basket.id = '{$baskId}'");
 }
+function subBuy($sessionId, $phone) {
+    $sessId = strip_tags(htmlspecialchars(mysqli_real_escape_string(getConnect(), $sessionId)));
+    $phone = strip_tags(htmlspecialchars(mysqli_real_escape_string(getConnect(), $phone)));
+    getDBRequest("INSERT INTO subbuy (id_session, phone) VALUES ('{$sessId}','{$phone}')");
+}
+function getPhone($sessionId) {
+    return getDBRequest("SELECT phone FROM subbuy WHERE id_session={$sessionId}");
+}
