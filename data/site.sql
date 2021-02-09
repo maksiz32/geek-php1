@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 09 2021 г., 16:05
+-- Время создания: Фев 09 2021 г., 18:28
 -- Версия сервера: 10.1.30-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -70,8 +70,7 @@ INSERT INTO `feedbacks` (`id`, `id_products`, `name`, `feedback`) VALUES
 (2, 1, 'M', 'kbkbjkbb bjkb jb jk kjk'),
 (3, 1, '3', 'jhghgj khjjk jkhjk hk kjh khkj'),
 (5, 2, 'M1', 'hbk gj gjujhjkhkjhhkjhkj jhjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj jjjjjjjjjjjjjjjjjjjjjjjjjjjjj jiutfdddddddddddddddddd'),
-(9, 2, '555', '5555'),
-(10, 0, 'M', '44444444444');
+(9, 2, '555', '5555');
 
 -- --------------------------------------------------------
 
@@ -172,9 +171,6 @@ CREATE TABLE `subbuy` (
 --
 
 INSERT INTO `subbuy` (`id`, `id_session`, `phone`) VALUES
-(3, '0', '89111111111'),
-(4, '0', '89111111111'),
-(5, '0', '89111111111'),
 (6, 'n955nf4tcuucc29j8oagfb18rbpatrgf', '89111111111');
 
 -- --------------------------------------------------------
