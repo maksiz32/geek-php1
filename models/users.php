@@ -3,7 +3,6 @@ function secUser($user) {
     return strip_tags(htmlspecialchars(mysqli_real_escape_string(getConnect(), $user)));
 }
 function secPassword($pass) {
-    $pass = strip_tags(htmlspecialchars(mysqli_real_escape_string(getConnect(), $request['password'])));
     return password_hash($pass, PASSWORD_DEFAULT);
 }
 function registration($request) {
@@ -13,8 +12,9 @@ function registration($request) {
     return [$res1, $username];
 }
 function hasUser($req) {
-    $user = getDBRequest("SELECT username, password FROM users WHERE username='{$req}'");
+    $user = getDBRequest("SELECT * FROM users WHERE username='{$req}'");
     if ($req === $user[0]['username']) {
+        $user[0]['role'] = secPassword($user[0]['role']);
         return $user[0];
     } else {
         return false;
@@ -22,10 +22,6 @@ function hasUser($req) {
 }
 function validateUser($user, $password) {
     $user = secUser($user);
-    $pass = secPassword($password);
     $getUser = hasUser($user);
-    if ($getUser && hash_equals($getUser['password'], $pass)) {
-        return true;
-    }
-    return false;
+    return (password_verify($password, $getUser['password']));
 }

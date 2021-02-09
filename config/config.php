@@ -11,7 +11,7 @@ define('DB_USERNAME', 'site');
 define('DB_PASSWORD', '12345');
 
 include ROOT . "/engine/db_connections.php";
-include ROOT . "/config/menu.php";
+// include ROOT . "/config/menu.php";
 include ROOT . "/models/menu.php";
 include ROOT . "/engine/controller.php";
 include ROOT . "/engine/functions.php";
@@ -22,5 +22,6 @@ include ROOT . "/models/math.php";
 include ROOT . "/models/products.php";
 include ROOT . "/models/feedbacks.php";
 include ROOT . "/models/users.php";
+include ROOT . "/models/basket.php";
 include ROOT . "/engine/jcalc.php";
 include ROOT . "/engine/log.php";
