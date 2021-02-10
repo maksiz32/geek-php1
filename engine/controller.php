@@ -65,7 +65,6 @@ function prepareVariables($url_array) {
             break;
 
         case 'products':
-            // session_start();
             $params['page'] = implode('/', ['catalog', $url_array[1]]);
             $params['products'] = getProducts();
             $params['pictures'] = getPictures();
@@ -105,30 +104,38 @@ function prepareVariables($url_array) {
             break;
         
         // case 'apicalc':
-            // $res = file_get_contents('php://input');
-            // $res1 = json_decode($res, true);
-            // _log($res1, "res-json");
-            // $op1 = (int) $res1->op1;
-            // $op2 = (int) $res1->op2;
-            // $opType = $res1->sum;
-            // $res['result'] = mathOperation($op1, $op2, $opType);
-            // header('Content-Type: application/json');
-            // echo json_encode($res, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-            // die();
+        //     $res = file_get_contents('php://input');
+        //     $res1 = json_decode($res, true);
+        //     $op1 = (int) $res1->op1;
+        //     $op2 = (int) $res1->op2;
+        //     $opType = $res1['opType'];
+        //     $res1['result'] = mathOperation($op1, $op2, $opType);
+        //     _log($res1, "jcalck");
+        //     header('Content-Type: application/json');
+        //     echo json_encode($res1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        //     die();
 
         case 'buy':
             session_start();
             $sessionId = session_id();
             $productId = (int) $_POST['id'];
-            setBasket($productId, $sessionId);
+            $price = (int) $_POST['price'];
+            setBasket($productId, $sessionId, $price);
             header('Location: /products');
             break;
 
         case 'basket':
             $params['page'] = implode('/', ['basket', $url_array[1]]);
-            session_start();
-            $sessionId = session_id();
-            $params['products'] = allProductsBySessionId($sessionId);
+            if (isset($url_array[2])) {
+                $sessionId = secUser($url_array[2]);
+            } else {
+                session_start();
+                $sessionId = session_id();
+            }
+                $params['countOrder'] = countBasketBuyer($sessionId);
+                $params['summOrder'] = sumOrder($sessionId);
+                $params['products'] = allProductsBySessionId($sessionId);
+                $params['name'] = getName($sessionId);
             break;
 
         case 'delbask':
@@ -142,16 +149,14 @@ function prepareVariables($url_array) {
             break;
         case 'buyall':
             session_start();
-            $sessionId = session_id();
-            subBuy($sessionId, $_POST['phone']);
+            $sessionId = secUser(session_id());
+            subBuy($sessionId, $_POST['phone'], $_POST['name']);
             session_regenerate_id();
             header('Location: /');
             die();
         case 'allbuyers':
             if (is_admin($_SESSION['username'])) {
                 $params['page'] = implode('/', ['admin', $url_array[1]]);
-                session_start();
-                $sessionId = session_id();
                 $params['phones'] = getPhone();
                 break;
             } else {

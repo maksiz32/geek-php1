@@ -23,5 +23,4 @@ include ROOT . "/models/products.php";
 include ROOT . "/models/feedbacks.php";
 include ROOT . "/models/users.php";
 include ROOT . "/models/basket.php";
-include ROOT . "/engine/jcalc.php";
 include ROOT . "/engine/log.php";

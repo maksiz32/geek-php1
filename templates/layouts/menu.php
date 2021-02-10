@@ -47,6 +47,16 @@ $nav = [
     [
         'title' => "Корзина (".$countP.")",
         'uri' => '/basket'
+    ],
+    [
+        'title' => "Админка",
+        'uri' => '#',
+        'subitems' => [
+            [
+                'title' => 'Все заказы',
+                'uri' => "/allbuyers"
+            ]
+        ]
     ]
 ];
 echo setMenu($nav);

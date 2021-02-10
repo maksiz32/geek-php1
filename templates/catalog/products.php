@@ -18,6 +18,7 @@
                     <?php endif; ?>
                     <div><?=$item['description']?></div>
                     <span><?=$item['price']?></span>
+                    <input type="hidden" value="<?=$item['price']?>" name="price">
                 </a>
                 <?php if ($username): ?>
                     <button type="submit">Купить</button>
@@ -26,6 +27,7 @@
                 <?php endif; ?>
             </div>
         </form>
+        <hr>
     <?php endforeach;
         endif; ?>
 </div>

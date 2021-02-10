@@ -2,6 +2,8 @@
     <h2>Корзина</h2>
 </div>
 <div>
+<h3><?=$name?></h3>
+    Всего в корзине: <?=$countOrder?> товара, на сумму: <?=$summOrder?> рублей.
     <?php if (isset($countP) && !empty($countP)): ?>
         <a href="/submbuy" class="btn-blue">Оформить заказ</a>
     <?php endif; ?>
@@ -16,6 +18,7 @@
                 <span><?=$item['price']?></span>
             </div>
             <a href="/delbask/<?=$item['id']?>" class="btn-red">Удалить из корзины</a>
+            <hr>
             <?php endif; ?>
     <?php endforeach;
         endif; ?>
