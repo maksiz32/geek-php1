@@ -152,11 +152,11 @@ function prepareVariables($url_array) {
                 $params['page'] = implode('/', ['admin', $url_array[1]]);
                 session_start();
                 $sessionId = session_id();
-                $params['phones'] = getPhone(secUser($sessionId));
+                $params['phones'] = getPhone();
                 break;
             } else {
-            header('Location: /');
-            die();
+                header('Location: /');
+                die();
             }
 
         case 'register':

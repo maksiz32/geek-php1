@@ -28,5 +28,5 @@ function validateUser($user, $password) {
 function is_admin($session) {
     $session = secUser($session);
     $role = getDBRequest("SELECT role FROM users WHERE username='{$session}'")[0];
-    return  (password_verify('admin', $role['role']));
+    return password_verify('admin', $role['role']);
 }

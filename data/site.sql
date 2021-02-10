@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 09 2021 г., 18:28
+-- Время создания: Фев 10 2021 г., 16:06
 -- Версия сервера: 10.1.30-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -191,7 +191,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`) VALUES
-(3, 'admin', '$2y$10$PRcwSiqo4SRRIwFmbrSZ8uRxawcFA7pzkJwqTc5339wYbmyGeeMye', '$2y$10$iWMMERE6Oi8CDRQTw9vJY.lO68RQM/q3fTOWit3bF17utKTivUff2');
+(3, 'admin', '$2y$10$PRcwSiqo4SRRIwFmbrSZ8uRxawcFA7pzkJwqTc5339wYbmyGeeMye', '$2y$10$S30WOqNiUtodsv/zjuH3duc4gviYM7joSXg4rHZDWPk3PvPzWtCL2');
 
 --
 -- Индексы сохранённых таблиц
