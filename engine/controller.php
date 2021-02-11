@@ -191,9 +191,14 @@ function prepareVariables($url_array) {
             }
             break;
 
-        // case 'apicatalog':
-        //     echo json_encode(getCatalog(), JSON_UNESCAPED_UNICODE);
-        //     die();
+        case 'apilike':
+            $id = (int) $url_array[2];
+            $response['id'] = $id;
+            $r = json_encode($response);
+            // var_dump($r);
+            echo $r;
+            // echo json_encode(getCatalog(), JSON_UNESCAPED_UNICODE);
+            die();
     }
     return $params;
 }

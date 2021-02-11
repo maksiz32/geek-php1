@@ -17,8 +17,9 @@
                         <?php endforeach; ?>
                     <?php endif; ?>
                     <div><?=$item['description']?></div>
-                    <span><?=$item['price']?></span>
-                    <input type="hidden" value="<?=$item['price']?>" name="price">
+                    <span>Цена: <?=$item['price']?></span>
+                    <input type="hidden" value="<?=$item['price']?>" name="price"><br>
+                    <span id="<?=$item['id']?>">Likes: <?=$item['likes']?></span>
                 </a>
                 <?php if ($username): ?>
                     <button type="submit">Купить</button>
@@ -27,7 +28,23 @@
                 <?php endif; ?>
             </div>
         </form>
+            <button class="like" data-id="<?=$item['id']?>">Like!</button>
         <hr>
     <?php endforeach;
         endif; ?>
+<script>
+    let buttons = document.querySelectorAll('.like');
+    buttons.forEach((elem) => {
+        elem.addEventListener('click', function() {
+            let id = elem.getAttribute('data-id');
+            (
+                async function() {
+                    const response = await fetch('/apilike/' + id);
+                    const answer = await response.json();
+                    console.log(answer);
+                }
+            )();
+        })
+    });
+</script>
 </div>

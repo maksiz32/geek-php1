@@ -15,7 +15,7 @@ include ROOT . "/engine/db_connections.php";
 include ROOT . "/models/menu.php";
 include ROOT . "/engine/controller.php";
 include ROOT . "/engine/functions.php";
-include ROOT . "/models/catalog.php";
+//include ROOT . "/models/catalog.php";
 include ROOT . "/models/gallery.php";
 include ROOT . "/engine/classSimpleImage.php";
 include ROOT . "/models/math.php";
