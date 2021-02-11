@@ -7,6 +7,7 @@
         <form action="/buy" method="post">
             <div class="galleryCard">
                 <a href="/item/<?=$item['id']?>" style="text-decoration: none;">
+                <input type="hidden" value="<?=$item['id']?>" name="id">
                     <h3><?=$item['name']?></h3>
                     <?php if(!empty($pictures)): ?>
                         <?php foreach($pictures as $pic): ?>
@@ -17,10 +18,16 @@
                     <?php endif; ?>
                     <div><?=$item['description']?></div>
                     <span><?=$item['price']?></span>
+                    <input type="hidden" value="<?=$item['price']?>" name="price">
                 </a>
-                <button type="submit">Купить</button>
+                <?php if ($username): ?>
+                    <button type="submit">Купить</button>
+                <?php else: ?>
+                    <div>Чтобы приобрести товар, авторизуйтесь</div>
+                <?php endif; ?>
             </div>
         </form>
+        <hr>
     <?php endforeach;
         endif; ?>
 </div>

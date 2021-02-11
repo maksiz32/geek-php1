@@ -1,8 +1,6 @@
 <?php
 //Для каждой страницы готовим массив со своим набором переменных
 
-use function GuzzleHttp\json_decode;
-
 function prepareVariables($url_array) {
     
     if ($url_array[1] == "") {
@@ -10,6 +8,8 @@ function prepareVariables($url_array) {
     } else {
         $params['page'] = $url_array[1];
     }
+
+    $params['countP'] = countInBasket(session_id());
 
     //Можно менять шаблон под разные страницы, передавая разное значение этого параметра в CASE(ах)
     $params['layout'] = 'app';
@@ -65,7 +65,6 @@ function prepareVariables($url_array) {
             break;
 
         case 'products':
-            session_start();
             $params['page'] = implode('/', ['catalog', $url_array[1]]);
             $params['products'] = getProducts();
             $params['pictures'] = getPictures();
@@ -103,27 +102,68 @@ function prepareVariables($url_array) {
                 $params = array_merge($params, $editArr);
             }
             break;
-        ############## НЕ РАБОТАЕТ JSON_DECODE ТОЛЬКО ЗДЕСЬ ##############
+        
         // case 'apicalc':
-            // $op1 = (int) $_POST['op1'];
-            // $op2 = (int) $_POST['op2'];
-            // $opType = $_POST['sum'];
-            // $res['result'] = mathOperation($op1, $op2, $opType);
-            // $res['result'] = [$op1, $op2, $opType];
-            // $res = file_get_contents('php://input');
-            // $res1 = json_decode($res, true);
-            // _log($res1, "res-json");
-            // header('Content-Type: application/json');
-            // echo json_encode($res1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-            // die();
+        //     $res = file_get_contents('php://input');
+        //     $res1 = json_decode($res, true);
+        //     $op1 = (int) $res1->op1;
+        //     $op2 = (int) $res1->op2;
+        //     $opType = $res1['opType'];
+        //     $res1['result'] = mathOperation($op1, $op2, $opType);
+        //     _log($res1, "jcalck");
+        //     header('Content-Type: application/json');
+        //     echo json_encode($res1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+        //     die();
 
         case 'buy':
-            // header('Location: /products');
+            session_start();
+            $sessionId = session_id();
+            $productId = (int) $_POST['id'];
+            $price = (int) $_POST['price'];
+            setBasket($productId, $sessionId, $price);
+            header('Location: /products');
             break;
 
         case 'basket':
-
+            $params['page'] = implode('/', ['basket', $url_array[1]]);
+            if (isset($url_array[2])) {
+                $sessionId = secUser($url_array[2]);
+            } else {
+                session_start();
+                $sessionId = session_id();
+            }
+                $params['countOrder'] = countBasketBuyer($sessionId);
+                $params['summOrder'] = sumOrder($sessionId);
+                $params['products'] = allProductsBySessionId($sessionId);
+                $params['name'] = getName($sessionId);
             break;
+
+        case 'delbask':
+            // $params['page'] = implode('/', ['basket', $url_array[1]]);
+            $baskId = $url_array[2];
+            delFromBaskById($baskId);
+            header('Location: /basket');
+            die();
+        case 'submbuy':
+            $params['page'] = implode('/', ['basket', $url_array[1]]);
+            break;
+        case 'buyall':
+            session_start();
+            $sessionId = secUser(session_id());
+            subBuy($sessionId, $_POST['phone'], $_POST['name']);
+            session_regenerate_id();
+            header('Location: /');
+            die();
+        case 'allbuyers':
+            if (is_admin($_SESSION['username'])) {
+                $params['page'] = implode('/', ['admin', $url_array[1]]);
+                $params['phones'] = getPhone();
+                break;
+            } else {
+                header('Location: /');
+                die();
+            }
+
         case 'register':
             $params['layout'] = 'noregistration';
             break;
@@ -136,10 +176,12 @@ function prepareVariables($url_array) {
                 die();
             }//Добавить обработку ошибок регистрации
             break;
+
         case "logout":
             session_destroy();
             header('Location: /');
             die();
+
         case "auth":
             if (validateUser($_POST['username'], $_POST['password'])) {
                 session_start();

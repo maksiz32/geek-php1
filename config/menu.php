@@ -45,8 +45,18 @@ $nav = [
         ]
     ],
     [
-        'title' => "Корзина ({$count})",
-        'uri' => '#'
+        'title' => "Корзина ({$countP})",
+        'uri' => '/basket'
+    ],
+    [
+        'title' => "Админка",
+        'uri' => '#',
+        'subitems' => [
+            [
+                'title' => 'Все заказы',
+                'uri' => "/allbuyers"
+            ]
+        ]
     ]
 ];
 

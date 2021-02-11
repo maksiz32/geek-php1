@@ -1,0 +1,37 @@
+### 09.02.2021 01:15:31
+Array
+(
+    [0] => admin
+    [1] => 123
+    [2] => Array
+        (
+            [id] => 1
+            [username] => admin
+            [password] => $2y$10$ef2ceJ/yFYOrtN7dPaRI7.dK26qIREIs4SHWGl07BgiQq/7AWW14C
+            [role] => admin
+        )
+
+)
+
+
+
+### 09.02.2021 01:20:06
+Array
+(
+    [0] => admin
+    [1] => 123
+    [2] => $2y$10$ef2ceJ/yFYOrtN7dPaRI7.dK26qIREIs4SHWGl07BgiQq/7AWW14C
+)
+
+
+
+### 09.02.2021 01:21:49
+Array
+(
+    [0] => admin
+    [1] => 123
+    [2] => $2y$10$BX483Fs0faw6Exn6moIXb.X7TgyY/Hg0u5ur0PKXCaCgDIh79CQ8m
+)
+
+
+

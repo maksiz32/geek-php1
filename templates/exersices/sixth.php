@@ -27,16 +27,16 @@
                 <input type="text" name="summa1" value='<?php if(isset($summa1)) echo $summa1?>' disabled>
             </form>
             </li><br>
-            <!-- <li>Создать калькулятор ajax<br><br>
+            <li>Создать калькулятор ajax<br><br>
                 <input type="text" name="argF2" id="argF2">
                 И
                 <input type="text" name="argS2" id="argS2">
                 <button type="submit" id="start" name="sum">+</button>
-                <button type="submit" id="start" name="minus">-</button>
+                <!-- <button type="submit" id="start" name="minus">-</button>
                 <button type="submit" id="start" name="mult">*</button>
-                <button type="submit" id="start" name="del">/</button>
+                <button type="submit" id="start" name="del">/</button> -->
                 <input type="text" name="summa2" id="summa2" disabled>
-            </li> -->
+            </li>
             <li>**. Вместо отзывов к сайту сделайте отзывы к товару. На странице с отдельным товаром.</li>
             <li>Создать страницу каталога товаров: ВАЖНО
                 <ul>
