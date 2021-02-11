@@ -74,3 +74,9 @@ function doActionItems($post, $files, $url_array) {
     }
     return $params;
 }
+function addLikesProd($id) {
+    getDBRequest("UPDATE products SET likes=likes+1 WHERE id={$id}");
+}
+function getLike($id) {
+    return getDBRequest("SELECT likes FROM products WHERE id='{$id}'")[0]['likes'];
+}

@@ -19,7 +19,7 @@
                     <div><?=$item['description']?></div>
                     <span>Цена: <?=$item['price']?></span>
                     <input type="hidden" value="<?=$item['price']?>" name="price"><br>
-                    <span id="<?=$item['id']?>">Likes: <?=$item['likes']?></span>
+                    Likes: <span id="<?=$item['id']?>"><?=$item['likes']?></span>
                 </a>
                 <?php if ($username): ?>
                     <button type="submit">Купить</button>
@@ -41,7 +41,7 @@
                 async function() {
                     const response = await fetch('/apilike/' + id);
                     const answer = await response.json();
-                    console.log(answer);
+                    document.getElementById(id).innerText = answer.like;
                 }
             )();
         })

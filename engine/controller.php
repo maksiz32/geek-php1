@@ -193,8 +193,10 @@ function prepareVariables($url_array) {
 
         case 'apilike':
             $id = (int) $url_array[2];
-            $response['id'] = $id;
-            $r = json_encode($response);
+            addLikesProd($id);
+            // $response['id'] = $id;
+            $response['like'] = getLike($id);
+            $r = json_encode($response, JSON_UNESCAPED_UNICODE);
             // var_dump($r);
             echo $r;
             // echo json_encode(getCatalog(), JSON_UNESCAPED_UNICODE);
