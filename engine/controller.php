@@ -73,21 +73,35 @@ function prepareVariables($url_array) {
 
         case 'item':
             $params['page'] = implode('/', ['catalog', $url_array['main_page']]);
-            if (isset($url_array['feedback_id'])) {
-                $params = doFeedbackAction($url_array);
-            }
-            $id = $url_array['product_id'];
-            $params['item'] = getOneItem('read', $id);
-            $params['feedbacks'] = getFeedbacksById($id);
-            $params['pics'] = getPicturesByProdId($id);
+            // if (isset($url_array[4])) {
+            //     $action = $url_array[3];
+            //     $idFeed = (int) $url_array[4];
+            // }
+            // if (!empty($_POST) && empty($_POST['id'])) {
+            //     addFeedback($_POST);
+            // } else if (!empty($_POST)) {
+            //     editFeedback($_POST);
+            // }
+            // if ($action == 'edit') {
+            //     $params['feed'] = getFeed($idFeed);
+            // }
+            // if ($action == 'delete') {
+            //     delFeed($idFeed);
+            // }
+                $id = (int) $url_array['product_id'];
+                $params['item'] = getOneItem('read', $id);
+                $params['feedbacks'] = getFeedbacksById($id);
+                $params['pics'] = getPicturesByProdId($id);
             break;
-
         case 'edit-item':
             $params['page'] = implode('/', ['catalog', $url_array['main_page']]);
             if (!empty($_POST) || !empty($_FILES)) {
                 $editArr = doActionItems($url_array);
                 $params = array_merge($params, $editArr);
             }
+            break;
+        case 'feedback':
+
             break;
         
         // case 'apicalc':

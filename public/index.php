@@ -31,10 +31,6 @@ switch ($url_array['main_page']) {
         if (isset($urlArray[2])) {
             $url_array['id'] = (int) $urlArray[2];
         }
-        if (isset($urlArray[4])) {
-            $url_array['action'] = $urlArray[3];
-            $url_array['feedback_id'] = (int) $url_array[4];
-        }
         break;
     case 'basket':
         if (isset($urlArray[2])) {
