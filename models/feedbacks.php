@@ -29,7 +29,7 @@ function addFeedback() {
     $name = strip_tags(htmlspecialchars(mysqli_real_escape_string(getConnect(), $_POST['name'])));
     $feedback = strip_tags(htmlspecialchars(mysqli_real_escape_string(getConnect(), $_POST['feedback'])));
     $idProd = (int) $_POST['idProd'];
-    return getDBRequest("INSERT INTO feedbacks (id_products, name, feedback) VALUES (\"{$idProd}\", \"{$name}\", \"{$feedback}\")");
+    return getDBRequest("INSERT INTO feedbacks (id_products, name, feedback) VALUES ('{$idProd}', '{$name}', '{$feedback}')");
 }
 
 function editFeedback() {

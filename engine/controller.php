@@ -73,31 +73,40 @@ function prepareVariables($url_array) {
 
         case 'item':
             $params['page'] = implode('/', ['catalog', $url_array['main_page']]);
-            // if (isset($url_array[4])) {
-            //     $action = $url_array[3];
-            //     $idFeed = (int) $url_array[4];
-            // }
-            // if (!empty($_POST) && empty($_POST['id'])) {
-            //     addFeedback($_POST);
-            // } else if (!empty($_POST)) {
-            //     editFeedback($_POST);
-            // }
-            // if ($action == 'edit') {
-            //     $params['feed'] = getFeed($idFeed);
-            // }
-            // if ($action == 'delete') {
-            //     delFeed($idFeed);
-            // }
-                $id = (int) $url_array['product_id'];
-                $params['item'] = getOneItem('read', $id);
-                $params['feedbacks'] = getFeedbacksById($id);
-                $params['pics'] = getPicturesByProdId($id);
+            $id = (int) $url_array['product_id'];
+            if (!empty($_POST)) {
+                if (empty($_POST['id'])) {
+                    addFeedback();
+                } else if (!empty($_POST)) {
+                    editFeedback();
+                }
+                header("Location: /item/{$_POST['idProd']}");
+                die();
+            }
+            if (isset($url_array['feed_action']) && $url_array['feed_action'] == 'edit') {
+                $params['feed'] = getFeed($url_array['feedback_id']);
+            }
+            if (isset($url_array['feed_action']) && $url_array['feed_action'] == 'delete') {
+                delFeed($url_array['feedback_id']);
+                header("Location: /item/{$id}");
+                die();
+            }
+            $params['item'] = getOneItem('read', $id);
+            $params['feedbacks'] = getFeedbacksById($id);
+            $params['pics'] = getPicturesByProdId($id);
             break;
         case 'edit-item':
             $params['page'] = implode('/', ['catalog', $url_array['main_page']]);
-            if (!empty($_POST) || !empty($_FILES)) {
+            if (isset($url_array['id'])) {
+                $params['item'] = getOneItem('read', $url_array['id']);
+                $params['feedbacks'] = getFeedbacksById($url_array['id']);
+                $params['pics'] = getPicturesByProdId($url_array['id']);
+            }
+            if (!empty($_POST)) {
                 $editArr = doActionItems($url_array);
                 $params = array_merge($params, $editArr);
+                header('Location: /products');
+                die();
             }
             break;
         case 'feedback':
@@ -152,14 +161,14 @@ function prepareVariables($url_array) {
         case 'buyall':
             session_start();
             $sessionId = secUser(session_id());
-            subBuy($sessionId);
+            submitBuy($sessionId);
             session_regenerate_id();
             header('Location: /');
             die();
         case 'allbuyers':
             if (is_admin($_SESSION['username'])) {
                 $params['page'] = implode('/', ['admin', $url_array['main_page']]);
-                $params['phones'] = getPhone();
+                $params['phones'] = getSubmitBuy();
                 break;
             } else {
                 header('Location: /');

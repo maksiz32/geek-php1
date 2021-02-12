@@ -153,6 +153,7 @@ i.like:hover {
 }
 
 .btn-red {
+  padding: 8px;
   text-decoration: none;
   display: inline-block;
   background-color: red;
@@ -162,6 +163,7 @@ i.like:hover {
 }
 
 .btn-green {
+  padding: 8px;
   text-decoration: none;
   display: inline-block;
   background-color: green;
@@ -171,6 +173,7 @@ i.like:hover {
 }
 
 .btn-blue {
+  padding: 8px;
   text-decoration: none;
   display: inline-block;
   background-color: blue;
@@ -205,6 +208,25 @@ form + input {
   line-height: 30px;
   letter-spacing: 0.04em;
   color: #1F3F68;
+}
+
+.allOrders {
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.text-center {
+  text-align: center;
+}
+
+td, th {
+  padding: 3px;
+  border-bottom: 1px solid black;
+}
+
+th {
+  background: #b0e0e6;
+  border-top: 1px solid black;
 }
 
 .modalwindow {

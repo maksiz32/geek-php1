@@ -26,8 +26,8 @@ function validateUser() {
     $getUser = hasUser($user);
     return (password_verify($_POST['password'], $getUser['password']));
 }
-function is_admin($session) {
-    $session = secUser($session);
-    $role = getDBRequest("SELECT role FROM users WHERE username='{$session}'")[0];
+function is_admin($user) {
+    $user = secUser($user);
+    $role = getDBRequest("SELECT role FROM users WHERE username='{$user}'")[0];
     return password_verify('admin', $role['role']);
 }

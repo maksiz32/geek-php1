@@ -23,8 +23,8 @@ switch ($url_array['main_page']) {
     case 'item':
         $url_array['product_id'] = (int) $urlArray[2];
         if (isset($urlArray[4])) {
-            $url_array['action'] = $urlArray[3];
-            $url_array['feedback_id'] = (int) $url_array[4];
+            $url_array['feed_action'] = $urlArray[3];
+            $url_array['feedback_id'] = $urlArray[4];
         }
         break;
     case 'edit-item':

@@ -10,15 +10,18 @@ function allProductsBySessionId($sessionId) {
     return getDBRequest("SELECT basket.id AS id, basket.id_products, products.name, products.price, pictures.image FROM basket LEFT JOIN products ON basket.id_session='{$sessionId}' AND basket.id_products=products.id LEFT JOIN pictures ON basket.id_products=pictures.id_products GROUP BY id");
 }
 function delFromBaskById($basketId, $sessionId) {
-    return getDBRequest("DELETE FROM basket WHERE id = '{$basketId}' AND id_session='{$sessionId}'");
+    $sessionIdFromDB = getDBRequest("SELECT id_session FROM basket WHERE id='{$basketId}'")[0]['id_session'];
+    if ($sessionIdFromDB == $sessionId || is_admin($_SESSION['username'])) {
+        return getDBRequest("DELETE FROM basket WHERE id = '{$basketId}' AND id_session='{$sessionId}'");
+    }
 }
-function subBuy($sessionId) {
+function submitBuy($sessionId) {
     $sessId = secUser($sessionId);
     $phone = secUser($_POST['phone']);
     $name = secUser($_POST['name']);
     getDBRequest("INSERT INTO subbuy (id_session, phone, name) VALUES ('{$sessId}','{$phone}','{$name}')");
 }
-function getPhone() {
+function getSubmitBuy() {
     return getDBRequest("SELECT * FROM subbuy");
 }
 function countBasketBuyer($sessionId) {
