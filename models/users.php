@@ -1,13 +1,14 @@
 <?
-function secUser($user) {
+function secUser($user = null) {
+    (is_null($user)) ? $user = $_POST['username'] : true;
     return strip_tags(htmlspecialchars(mysqli_real_escape_string(getConnect(), $user)));
 }
 function secPassword($pass) {
     return password_hash($pass, PASSWORD_DEFAULT);
 }
-function registration($request) {
-    $username = secUser($request['username']);
-    $password = secPassword($request['password']);
+function registration() {
+    $username = secUser($_POST['username']);
+    $password = secPassword($_POST['password']);
     $res1 = getDBRequest("INSERT INTO users (username, password) VALUES ('{$username}','{$password}')");
     return [$res1, $username];
 }
@@ -20,10 +21,10 @@ function hasUser($req) {
         return false;
     }
 }
-function validateUser($user, $password) {
-    $user = secUser($user);
+function validateUser() {
+    $user = secUser($_POST['username']);
     $getUser = hasUser($user);
-    return (password_verify($password, $getUser['password']));
+    return (password_verify($_POST['password'], $getUser['password']));
 }
 function is_admin($session) {
     $session = secUser($session);

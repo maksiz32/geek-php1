@@ -51,8 +51,10 @@
                     <h4><?=$feed['name']?></h4>
                     <p><?=$feed['feedback']?></p>
                 </div>
+                <?php if(is_admin($username)): ?>
                 <a href="/item/<?=$item['id']?>/edit/<?=$feed['id']?>" class="btn-green">Редактировать</a>
                 <a href="/item/<?=$item['id']?>/delete/<?=$feed['id']?>" class="btn-red">Удалить</a>
+                <?php endif; ?>
                 <br>
                 <hr>
             <?php endforeach; ?>

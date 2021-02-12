@@ -3,102 +3,89 @@
 
 function prepareVariables($url_array) {
     
-    if ($url_array[1] == "") {
+    if ($url_array['main_page'] == "") {
         $params['page'] = 'index';
     } else {
-        $params['page'] = $url_array[1];
+        $params['page'] = $url_array['main_page'];
     }
 
     $params['countP'] = countInBasket(session_id());
+    $params['username'] = hasUser($_SESSION['username'])['username'];
 
     //Можно менять шаблон под разные страницы, передавая разное значение этого параметра в CASE(ах)
     $params['layout'] = 'app';
     switch ($params['page']) {
         case 'gallery':
-            $params['page'] = implode('/', ['galleries', $url_array[1]]);
+            $params['page'] = implode('/', ['galleries', $url_array['main_page']]);
             if (!empty($_FILES)) {
-                $params['message'] = uploadImg('/img/gallery/', $_FILES['myfile'], 'gallery');
-            }
-            //Удаление и изменение здесь может выполнить любой пользователь
-            if (count($url_array) >= 3) {
-                $action = $url_array[count($url_array) - 2];
-                $id = (int) $url_array[count($url_array) - 1];
-                $action($id);
+                $params['message'] = uploadImg('/img/gallery/', 'gallery');
             }
             $params['images'] = getGallery();
+            //Удаление и изменение здесь может выполнить любой пользователь
+            if (count($url_array) >= 3) {
+                $action = $url_array['action'];
+                $id = (int) $url_array['id'];
+                $action($id);
+            header('Location: /gallery');
+            die();
+            }
             break;
 
         case 'onepic':
-            $params['page'] = implode('/', ['galleries', $url_array[1]]);
-            $id = (int) $url_array[2];
+            $params['page'] = implode('/', ['galleries', $url_array['main_page']]);
+            $id = (int) $url_array['picture_id'];
+            addLikes($id);
             $params['pic'] = getOnePic($id);
             break;
 
-        // case 'second':
+        // case 'third':
+        // case 'fourth':
+        // case 'fifth':
         //     $params['page'] = implode('/', ['exersices', $url_array[1]]);
         //     break;
-        case 'third':
-        case 'fourth':
-        case 'fifth':
-            $params['page'] = implode('/', ['exersices', $url_array[1]]);
-            break;
-        case 'sixth':
-            $params['page'] = implode('/', ['exersices', $url_array[1]]);
-            if (!empty($_POST) && isset($_POST['argF'])) {
-                $argF = (float) strip_tags($_POST['argF']);
-                $argS = (float) strip_tags($_POST['argS']);
-                $operation = $_POST['operation'];
-                $summa = mathOperation($argF, $argS, $operation);
-                $p = compact('argF', 'argS', 'operation', 'summa');
-                $params = array_merge($params, $p);
-            } else if (!empty($_POST) && isset($_POST['argF1'])) {
-                $arr1 = ['argF1', 'argS1'];
-                $argF1 = (float) strip_tags($_POST['argF1']);
-                $argS1 = (float) strip_tags($_POST['argS1']);
-                foreach($_POST as $key => $val) {
-                    if(!in_array($key, $arr1)) $operation1 = $key;
-                }
-                $summa1 = mathOperation($argF1, $argS1, $operation1);
-                $p = compact('argF1', 'argS1', 'operation1', 'summa1');
-                $params = array_merge($params, $p);
-            }
-            break;
+        // case 'sixth':
+        //     $params['page'] = implode('/', ['exersices', $url_array[1]]);
+        //     if (!empty($_POST) && isset($_POST['argF'])) {
+        //         $argF = (float) strip_tags($_POST['argF']);
+        //         $argS = (float) strip_tags($_POST['argS']);
+        //         $operation = $_POST['operation'];
+        //         $summa = mathOperation($argF, $argS, $operation);
+        //         $p = compact('argF', 'argS', 'operation', 'summa');
+        //         $params = array_merge($params, $p);
+        //     } else if (!empty($_POST) && isset($_POST['argF1'])) {
+        //         $arr1 = ['argF1', 'argS1'];
+        //         $argF1 = (float) strip_tags($_POST['argF1']);
+        //         $argS1 = (float) strip_tags($_POST['argS1']);
+        //         foreach($_POST as $key => $val) {
+        //             if(!in_array($key, $arr1)) $operation1 = $key;
+        //         }
+        //         $summa1 = mathOperation($argF1, $argS1, $operation1);
+        //         $p = compact('argF1', 'argS1', 'operation1', 'summa1');
+        //         $params = array_merge($params, $p);
+        //     }
+        //     break;
 
         case 'products':
-            $params['page'] = implode('/', ['catalog', $url_array[1]]);
+            $params['page'] = implode('/', ['catalog', $url_array['main_page']]);
             $params['products'] = getProducts();
             $params['pictures'] = getPictures();
             break;
 
         case 'item':
-            $params['page'] = implode('/', ['catalog', $url_array[1]]);
-            if (isset($url_array[4])) {
-                $action = $url_array[3];
-                $idFeed = (int) $url_array[4];
+            $params['page'] = implode('/', ['catalog', $url_array['main_page']]);
+            if (isset($url_array['feedback_id'])) {
+                $params = doFeedbackAction($url_array);
             }
-            if (!empty($_POST) && empty($_POST['id'])) {
-                addFeedback($_POST);
-            } else if (!empty($_POST)) {
-                editFeedback($_POST);
-            }
-            if ($action == 'edit') {
-                $params['feed'] = getFeed($idFeed);
-            }
-            if ($action == 'delete') {
-                delFeed($idFeed);
-            }
-            if (isset($url_array[2])) {
-                $id = (int) $url_array[2];
-                $params['item'] = getOneItem('read', $id);
-                $params['feedbacks'] = getFeedbacksById($id);
-                $params['pics'] = getPicturesByProdId($id);
-            }
+            $id = $url_array['product_id'];
+            $params['item'] = getOneItem('read', $id);
+            $params['feedbacks'] = getFeedbacksById($id);
+            $params['pics'] = getPicturesByProdId($id);
             break;
 
         case 'edit-item':
-            $params['page'] = implode('/', ['catalog', $url_array[1]]);
+            $params['page'] = implode('/', ['catalog', $url_array['main_page']]);
             if (!empty($_POST) || !empty($_FILES)) {
-                $editArr = doActionItems($_POST, $_FILES, $url_array);
+                $editArr = doActionItems($url_array);
                 $params = array_merge($params, $editArr);
             }
             break;
@@ -125,9 +112,9 @@ function prepareVariables($url_array) {
             break;
 
         case 'basket':
-            $params['page'] = implode('/', ['basket', $url_array[1]]);
-            if (isset($url_array[2])) {
-                $sessionId = secUser($url_array[2]);
+            $params['page'] = implode('/', ['basket', $url_array['main_page']]);
+            if (isset($url_array['session_id'])) {
+                $sessionId = secUser($url_array['session_id']);
             } else {
                 session_start();
                 $sessionId = session_id();
@@ -139,24 +126,25 @@ function prepareVariables($url_array) {
             break;
 
         case 'delbask':
-            // $params['page'] = implode('/', ['basket', $url_array[1]]);
-            $baskId = $url_array[2];
-            delFromBaskById($baskId);
+            session_start();
+            $sessionId = session_id();
+            $basketId = $url_array['basket_id'];
+            delFromBaskById($basketId, $sessionId);
             header('Location: /basket');
             die();
         case 'submbuy':
-            $params['page'] = implode('/', ['basket', $url_array[1]]);
+            $params['page'] = implode('/', ['basket', $url_array['main_page']]);
             break;
         case 'buyall':
             session_start();
             $sessionId = secUser(session_id());
-            subBuy($sessionId, $_POST['phone'], $_POST['name']);
+            subBuy($sessionId);
             session_regenerate_id();
             header('Location: /');
             die();
         case 'allbuyers':
             if (is_admin($_SESSION['username'])) {
-                $params['page'] = implode('/', ['admin', $url_array[1]]);
+                $params['page'] = implode('/', ['admin', $url_array['main_page']]);
                 $params['phones'] = getPhone();
                 break;
             } else {
@@ -168,7 +156,7 @@ function prepareVariables($url_array) {
             $params['layout'] = 'noregistration';
             break;
         case 'reg':
-            $res = registration($_POST);
+            $res = registration();
             if ($res[0]) {
                 session_start();
                 $_SESSION['username'] = $res[1];
@@ -183,16 +171,16 @@ function prepareVariables($url_array) {
             die();
 
         case "auth":
-            if (validateUser($_POST['username'], $_POST['password'])) {
+            if (validateUser()) {
                 session_start();
-                $_SESSION['username'] = secUser($_POST['username']);
+                $_SESSION['username'] = secUser();
                 header('Location: /');
                 die();
             }
             break;
 
         case 'apilike':
-            $id = (int) $url_array[2];
+            $id = (int) $url_array['like_id'];
             addLikesProd($id);
             // $response['id'] = $id;
             $response['like'] = getLike($id);

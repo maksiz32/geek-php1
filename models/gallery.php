@@ -4,7 +4,6 @@ function getGallery() {
 }
 
 function getOnePic(int $id) {
-    addLikes($id);
     return getDBRequest("SELECT * FROM gallery WHERE id={$id}")[0];
 }
 
@@ -16,8 +15,9 @@ function delete(int $id) {
     return getDBRequest("DELETE FROM gallery WHERE id={$id}");
 }
 
-function uploadImg($path, $source, $table) {
-    if (!empty($source) && is_uploaded_file($source['tmp_name'])) {
+function uploadImg($path, $table, $source = null) {
+    $source = $_FILES['myfile'];
+    if (!is_null($source) && is_uploaded_file($source['tmp_name'])) {
         $max_size = 1024*1024*5;
         //Проверка на загрузку не более 5Мб
         if($source["size"] > $max_size) {
@@ -31,8 +31,12 @@ function uploadImg($path, $source, $table) {
         }
         //Переименование загруженного файла
         $uploadpath = DIR_ROOT . $path;
-        $name_file = uniqid() . "." . pathinfo($source['name'])['extension'];;
+        $name_file = uniqid() . "." . pathinfo($source['name'])['extension'];
         if (move_uploaded_file($source['tmp_name'], $uploadpath . $name_file)) {
+            $image = new SimpleImage();
+            $image->load($uploadpath . $name_file);
+            $image->resizeToWidth(800);
+            $image->save($uploadpath . $name_file);
             $filesize = getFileSize($uploadpath . $name_file);
             $image = new SimpleImage();
             $image->load($uploadpath . $name_file);

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 10 2021 г., 16:06
+-- Время создания: Фев 12 2021 г., 13:08
 -- Версия сервера: 10.1.30-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -31,23 +31,24 @@ SET time_zone = "+00:00";
 CREATE TABLE `basket` (
   `id` int(11) NOT NULL,
   `id_products` int(11) NOT NULL,
-  `id_session` varchar(255) NOT NULL
+  `id_session` varchar(255) NOT NULL,
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `basket`
 --
 
-INSERT INTO `basket` (`id`, `id_products`, `id_session`) VALUES
-(6, 1, 'q8vjluecmscg0tm3uhv7csom310fbtuf'),
-(7, 2, 'q8vjluecmscg0tm3uhv7csom310fbtuf'),
-(9, 1, 'lo2lt987tof8a62m65p0fbspftr4v9at'),
-(10, 4, 'lo2lt987tof8a62m65p0fbspftr4v9at'),
-(11, 5, 'lo2lt987tof8a62m65p0fbspftr4v9at'),
-(13, 1, '0ts87aq7dh5mfngbfno58rk12accbag8'),
-(15, 2, '0ts87aq7dh5mfngbfno58rk12accbag8'),
-(16, 1, 'n955nf4tcuucc29j8oagfb18rbpatrgf'),
-(17, 2, 'n955nf4tcuucc29j8oagfb18rbpatrgf');
+INSERT INTO `basket` (`id`, `id_products`, `id_session`, `price`) VALUES
+(6, 1, 'q8vjluecmscg0tm3uhv7csom310fbtuf', 2200),
+(7, 2, 'q8vjluecmscg0tm3uhv7csom310fbtuf', 1320),
+(9, 1, 'lo2lt987tof8a62m65p0fbspftr4v9at', 661),
+(10, 4, 'lo2lt987tof8a62m65p0fbspftr4v9at', 230),
+(11, 5, 'lo2lt987tof8a62m65p0fbspftr4v9at', 12000),
+(13, 1, '0ts87aq7dh5mfngbfno58rk12accbag8', 482),
+(15, 2, '0ts87aq7dh5mfngbfno58rk12accbag8', 4545),
+(16, 1, 'n955nf4tcuucc29j8oagfb18rbpatrgf', 4545),
+(17, 2, 'n955nf4tcuucc29j8oagfb18rbpatrgf', 8555);
 
 -- --------------------------------------------------------
 
@@ -139,20 +140,20 @@ CREATE TABLE `products` (
   `description` mediumtext NOT NULL,
   `more_description` text NOT NULL,
   `price` int(11) NOT NULL,
-  `sreated_at` date NOT NULL
+  `likes` int(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Дамп данных таблицы `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `more_description`, `price`, `sreated_at`) VALUES
-(1, 'Товар 1', 'Описание Товар 1', 'Полное описание Товар 1', 2200, '2021-02-05'),
-(2, 'Товар 2', 'Описание Товар 2', 'Полное Описание Товар 22', 3000, '2021-02-05'),
-(3, 'Товар 3', 'Описание Товар 3', 'Полное описание Товар 3', 3330, '2021-02-06'),
-(4, 'Товар 4', 'Описание Товар 4', 'Полное описание Товар 4', 4004, '2021-02-09'),
-(5, 'Товар 5', 'Описание Товар 5', 'Полное описание Товар 5', 5505, '2021-02-09'),
-(6, 'Товар 6', 'Описание Товар 6', 'Полное описание Товар 6', 122550, '2021-02-09');
+INSERT INTO `products` (`id`, `name`, `description`, `more_description`, `price`, `likes`) VALUES
+(1, 'Товар 1', 'Описание Товар 1', 'Полное описание Товар 1', 2200, 3),
+(2, 'Товар 2', 'Описание Товар 2', 'Полное Описание Товар 22', 3000, 1),
+(3, 'Товар 3', 'Описание Товар 3', 'Полное описание Товар 3', 3330, 0),
+(4, 'Товар 4', 'Описание Товар 4', 'Полное описание Товар 4', 4004, 0),
+(5, 'Товар 5', 'Описание Товар 5', 'Полное описание Товар 5', 5505, 0),
+(6, 'Товар 6', 'Описание Товар 6', 'Полное описание Товар 6', 122550, 0);
 
 -- --------------------------------------------------------
 
@@ -163,6 +164,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `more_description`, `price`
 CREATE TABLE `subbuy` (
   `id` int(11) NOT NULL,
   `id_session` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
   `phone` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -170,8 +172,8 @@ CREATE TABLE `subbuy` (
 -- Дамп данных таблицы `subbuy`
 --
 
-INSERT INTO `subbuy` (`id`, `id_session`, `phone`) VALUES
-(6, 'n955nf4tcuucc29j8oagfb18rbpatrgf', '89111111111');
+INSERT INTO `subbuy` (`id`, `id_session`, `name`, `phone`) VALUES
+(6, 'n955nf4tcuucc29j8oagfb18rbpatrgf', 'admin', '89111111111');
 
 -- --------------------------------------------------------
 

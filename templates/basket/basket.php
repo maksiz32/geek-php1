@@ -13,7 +13,7 @@
             <div class="galleryCard">
                 <h3><?=$item['name']?></h3>
                 <?php if(isset($item['image']) && !empty($item['image'])): ?>
-                            <img src='/img/products/tmb/<?=$item['image']?>' width="150" alt="">
+                            <img src='/img/products/tmb/<?=$item['image']?>' width="80" alt="">
                 <?php endif; ?>
                 <span><?=$item['price']?></span>
             </div>

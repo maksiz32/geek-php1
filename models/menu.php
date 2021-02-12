@@ -1,14 +1,16 @@
 <?php
-function setMenu($arrMenu) {
+function setMenu($arrMenu, $username) {
     $strOut = '<ul>';
         foreach ($arrMenu as $key) {
-            $strOut .= "<li><a href=\"{$key['uri']}\">{$key['title']}</a>";
-            if (isset($key['subitems'])) {
-                $strOut .= "<ul>";
-                $strOut .= setMenu($key['subitems']);
-                $strOut .= "</ul>";
+            if ((isset($key['role']) && is_admin($username)) || !isset($key['role'])) {
+                $strOut .= "<li><a href=\"{$key['uri']}\">{$key['title']}</a>";
+                if (isset($key['subitems'])) {
+                    $strOut .= "<ul>";
+                    $strOut .= setMenu($key['subitems'], $username);
+                    $strOut .= "</ul>";
+                }
+                $strOut .= "</li>";
             }
-            $strOut .= "</li>";
         }
     $strOut .= '</ul>';
     return $strOut;
