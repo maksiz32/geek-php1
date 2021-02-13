@@ -17,7 +17,7 @@
                 <?php endif; ?>
                 <span><?=$item['price']?></span>
             </div>
-            <a href="/delbask/<?=$item['id']?>" class="btn-red">Удалить из корзины</a>
+            <a href="/delbask/<?=$item['id']?>/<?=$item['id_session']?>" class="btn-red">Удалить из корзины</a>
             <hr>
             <?php endif; ?>
     <?php endforeach;

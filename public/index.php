@@ -39,9 +39,18 @@ switch ($url_array['main_page']) {
         break;
     case 'delbask':
         $url_array['basket_id'] = $urlArray[2];
+        $url_array['basket_session_id'] = $urlArray[3];
         break;
     case 'apilike':
         $url_array['like_id'] = (int) $urlArray[2];
+        break;
+    case 'apibasket':
+        $url_array['id'] = (int) $urlArray[2];
+        $url_array['price'] = (int) $urlArray[3];
+        break;
+    case 'apistat':
+        $url_array['id'] = (int) $urlArray[2];
+        $url_array['status'] = (int) $urlArray[3];
         break;
 }
 

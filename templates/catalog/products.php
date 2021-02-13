@@ -5,7 +5,7 @@
     <?php if (!empty($products)):
         foreach ($products as $item): ?>
             <div class="productCard">
-                <form action="/buy" method="post">
+                <!-- <form action="/buy" method="post"> -->
                         <a href="/item/<?=$item['id']?>" style="text-decoration: none;">
                             <input type="hidden" value="<?=$item['id']?>" name="id">
                                 <h3><?=$item['name']?></h3>
@@ -28,15 +28,30 @@
                             </div>
                         <br>
                         <?php if ($username): ?>
-                            <button type="submit">Купить</button>
+                            <button type="submit" class="toBuy" data-id="<?=$item['id']?>" data-price="<?=$item['price']?>">Купить</button>
                         <?php else: ?>
                             <div>Чтобы приобрести товар, авторизуйтесь</div>
                         <?php endif; ?>
-                </form>
+                <!-- </form> -->
             </div>
     <?php endforeach;
         endif; ?>
 <script>
+    let buttons_buy = document.querySelectorAll('.toBuy');
+    buttons_buy.forEach((elem) => {
+        elem.addEventListener('click', function() {
+            let id = elem.getAttribute('data-id');
+            let price = elem.getAttribute('data-price');
+            (
+                async function() {
+                    const response = await fetch('/apibasket/' + id + "/" + price);
+                    const answer = await response.json();
+                    document.getElementById('price').innerText = answer.countB;
+                }
+            )();
+        })
+    });
+
     let buttons = document.querySelectorAll('.like');
     buttons.forEach((elem) => {
         elem.addEventListener('click', function() {

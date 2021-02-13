@@ -108,6 +108,15 @@ i.like:hover {
     border-radius: 5px;
     text-align: center;
 }
+.btn-yellow {
+    padding: 8px;
+    text-decoration: none;
+    display:inline-block;
+    background-color: yellowgreen;
+    color: black;
+    border-radius: 5px;
+    text-align: center;
+}
 .btn-green {
     padding: 8px;
     text-decoration: none;
@@ -126,8 +135,21 @@ i.like:hover {
     border-radius: 5px;
     text-align: center;
 }
-.btn-red:hover {
+.btn {
+    padding: 8px;
+    text-decoration: none;
+    display:inline-block;
+    background-color: gray;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 800;
+}
+.btn-red:hover, .btn-blue:hover, .btn-yellow:hover, .btn-green:hover, .btn:hover {
     background-color: #b30679;
+}
+.hidden {
+    display: none;
 }
 .bigPic {
     height: 70vh;

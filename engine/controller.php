@@ -67,6 +67,8 @@ function prepareVariables($url_array) {
 
         case 'products':
             $params['page'] = implode('/', ['catalog', $url_array['main_page']]);
+            session_start();
+            $params['session'] = session_id();
             $params['products'] = getProducts();
             $params['pictures'] = getPictures();
             break;
@@ -109,22 +111,8 @@ function prepareVariables($url_array) {
                 die();
             }
             break;
-        case 'feedback':
-
-            break;
-        
-        // case 'apicalc':
-        //     $res = file_get_contents('php://input');
-        //     $res1 = json_decode($res, true);
-        //     $op1 = (int) $res1->op1;
-        //     $op2 = (int) $res1->op2;
-        //     $opType = $res1['opType'];
-        //     $res1['result'] = mathOperation($op1, $op2, $opType);
-        //     _log($res1, "jcalck");
-        //     header('Content-Type: application/json');
-        //     echo json_encode($res1, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
-        //     die();
-
+######## СДЕЛАНО НА JS - apibasket ##########
+/*
         case 'buy':
             session_start();
             $sessionId = session_id();
@@ -133,7 +121,7 @@ function prepareVariables($url_array) {
             setBasket($productId, $sessionId, $price);
             header('Location: /products');
             break;
-
+*/
         case 'basket':
             $params['page'] = implode('/', ['basket', $url_array['main_page']]);
             if (isset($url_array['session_id'])) {
@@ -153,7 +141,11 @@ function prepareVariables($url_array) {
             $sessionId = session_id();
             $basketId = $url_array['basket_id'];
             delFromBaskById($basketId, $sessionId);
-            header('Location: /basket');
+            if (!is_admin($_SESSION['username'])) {
+                header("Location: /basket/{$sessionId}");
+            } else {
+                header("Location: /basket/{$url_array['basket_session_id']}");
+            }
             die();
         case 'submbuy':
             $params['page'] = implode('/', ['basket', $url_array['main_page']]);
@@ -168,7 +160,8 @@ function prepareVariables($url_array) {
         case 'allbuyers':
             if (is_admin($_SESSION['username'])) {
                 $params['page'] = implode('/', ['admin', $url_array['main_page']]);
-                $params['phones'] = getSubmitBuy();
+                $res = getSubmitBuy();
+                $params['phones'] = getSubmitBuyByHuman($res);
                 break;
             } else {
                 header('Location: /');
@@ -210,8 +203,24 @@ function prepareVariables($url_array) {
             $r = json_encode($response, JSON_UNESCAPED_UNICODE);
             // var_dump($r);
             echo $r;
-            // echo json_encode(getCatalog(), JSON_UNESCAPED_UNICODE);
             die();
+        case 'apibasket':
+            session_start();
+            $sessionId = session_id();
+            setBasket($url_array['id'], $sessionId, $url_array['price']);
+            $response['countB'] = countInBasket($sessionId);
+            $r = json_encode($response, JSON_UNESCAPED_UNICODE);
+            echo $r;
+            die();
+        case 'apistat':
+            if (is_admin($_SESSION['username'])) {
+                setStatusInBasket($url_array['id'], $url_array['status']);
+                $response = getSubmitBuy();
+                $resp2 = getSubmitBuyByHuman($response);
+                $r = json_encode($resp2, JSON_UNESCAPED_UNICODE);
+                echo $r;
+                die();
+            }
     }
     return $params;
 }

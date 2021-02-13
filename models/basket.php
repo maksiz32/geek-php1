@@ -7,12 +7,12 @@ function countInBasket($sessionId) {
     return $count[0]['count'];
 }
 function allProductsBySessionId($sessionId) {
-    return getDBRequest("SELECT basket.id AS id, basket.id_products, products.name, products.price, pictures.image FROM basket LEFT JOIN products ON basket.id_session='{$sessionId}' AND basket.id_products=products.id LEFT JOIN pictures ON basket.id_products=pictures.id_products GROUP BY id");
+    return getDBRequest("SELECT basket.id AS id, basket.id_products, basket.id_session AS id_session, products.name, products.price, pictures.image FROM basket LEFT JOIN products ON basket.id_session='{$sessionId}' AND basket.id_products=products.id LEFT JOIN pictures ON basket.id_products=pictures.id_products GROUP BY id");
 }
 function delFromBaskById($basketId, $sessionId) {
     $sessionIdFromDB = getDBRequest("SELECT id_session FROM basket WHERE id='{$basketId}'")[0]['id_session'];
     if ($sessionIdFromDB == $sessionId || is_admin($_SESSION['username'])) {
-        return getDBRequest("DELETE FROM basket WHERE id = '{$basketId}' AND id_session='{$sessionId}'");
+        return getDBRequest("DELETE FROM basket WHERE id='{$basketId}'");
     }
 }
 function submitBuy($sessionId) {
@@ -21,8 +21,36 @@ function submitBuy($sessionId) {
     $name = secUser($_POST['name']);
     getDBRequest("INSERT INTO subbuy (id_session, phone, name) VALUES ('{$sessId}','{$phone}','{$name}')");
 }
+function getStatus($req) {
+    $arr = [
+        '1' => 'Оформлен',
+        '2' => 'Оплачен',
+        '3' => 'Отправлен',
+        '4' => 'Завершен'
+    ];
+    return $arr[$req];
+}
+function setStatus($req) {
+    $arr = [
+        'Оформлен' => '1',
+        'Оплачен' => '2',
+        'Отправлен' => '3',
+        'Завершен' => '4'
+    ];
+    return $arr[$req];
+}
+function setStatusInBasket($id, $status) {
+    getDBRequest("UPDATE subbuy SET status={$status} WHERE id={$id}");
+}
 function getSubmitBuy() {
-    return getDBRequest("SELECT * FROM subbuy");
+    $result = getDBRequest("SELECT * FROM subbuy");
+    return $result;
+}
+function getSubmitBuyByHuman($result) {
+    foreach($result as &$res) {
+        $res['human_status'] = getStatus($res['status']);
+    }
+    return $result;
 }
 function countBasketBuyer($sessionId) {
     return getDBRequest("SELECT count(id) as count FROM basket WHERE id_session='{$sessionId}'")[0]['count'];

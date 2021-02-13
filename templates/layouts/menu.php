@@ -40,12 +40,13 @@ $nav = [
             ],
             [
                 'title' => 'Добавить в каталог',
-                'uri' => "/edit-item"
+                'uri' => "/edit-item",
+                'role' => 'admin'
             ]
         ]
     ],
     [
-        'title' => "Корзина (".$countP.")",
+        'title' => "Корзина (<span id='price'>".$countP."</span>)",
         'uri' => '/basket'
     ],
     [
