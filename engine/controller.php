@@ -221,6 +221,18 @@ function prepareVariables($url_array) {
                 echo $r;
                 die();
             }
+            break;
+        case 'my-orders':
+            session_start();
+            if (isset($_SESSION['username'])) {
+                if (is_admin($_SESSION['username'])) {
+                    $params['products'] = getAllOrders();
+                } else {
+                    session_start();
+                    $params['products'] = getOrdersByName($_SESSION['username']);
+                }
+            }
+            break;
     }
     return $params;
 }

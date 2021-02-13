@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 13 2021 г., 03:10
+-- Время создания: Фев 14 2021 г., 00:49
 -- Версия сервера: 10.1.30-MariaDB
 -- Версия PHP: 7.3.2
 
@@ -40,13 +40,6 @@ CREATE TABLE `basket` (
 --
 
 INSERT INTO `basket` (`id`, `id_products`, `id_session`, `price`) VALUES
-(6, 1, 'q8vjluecmscg0tm3uhv7csom310fbtuf', 2200),
-(7, 2, 'q8vjluecmscg0tm3uhv7csom310fbtuf', 1320),
-(9, 1, 'lo2lt987tof8a62m65p0fbspftr4v9at', 661),
-(10, 4, 'lo2lt987tof8a62m65p0fbspftr4v9at', 230),
-(11, 5, 'lo2lt987tof8a62m65p0fbspftr4v9at', 12000),
-(13, 1, '0ts87aq7dh5mfngbfno58rk12accbag8', 482),
-(15, 2, '0ts87aq7dh5mfngbfno58rk12accbag8', 4545),
 (17, 2, 'n955nf4tcuucc29j8oagfb18rbpatrgf', 8555),
 (20, 6, '0jne3cka547vk4t6r4ua1eu7ggbafmkm', 122550),
 (22, 3, 'ocniic6a6rb6ilu5tg9c7d7dgc1t04d0', 3330),
@@ -54,7 +47,11 @@ INSERT INTO `basket` (`id`, `id_products`, `id_session`, `price`) VALUES
 (26, 4, '3lt09udr58tt8g5d2ru55u76cvrf2ukf', 4004),
 (27, 1, 'kbvt22jdkiad8a0bk7l2v4ff949eghtq', 2200),
 (28, 2, 'kbvt22jdkiad8a0bk7l2v4ff949eghtq', 3000),
-(31, 8, 'kbvt22jdkiad8a0bk7l2v4ff949eghtq', 1500);
+(31, 8, 'kbvt22jdkiad8a0bk7l2v4ff949eghtq', 1500),
+(32, 1, 'n3r6kp0kcrhrhd8rqv7tvclugr0meq7v', 2200),
+(33, 2, 'n3r6kp0kcrhrhd8rqv7tvclugr0meq7v', 3000),
+(34, 3, 'n3r6kp0kcrhrhd8rqv7tvclugr0meq7v', 3330),
+(35, 4, 'n3r6kp0kcrhrhd8rqv7tvclugr0meq7v', 4004);
 
 -- --------------------------------------------------------
 
@@ -186,10 +183,11 @@ CREATE TABLE `subbuy` (
 
 INSERT INTO `subbuy` (`id`, `id_session`, `name`, `phone`, `status`) VALUES
 (6, 'n955nf4tcuucc29j8oagfb18rbpatrgf', 'admin', '89111111111', 2),
-(7, '0jne3cka547vk4t6r4ua1eu7ggbafmkm', 'M1', '89222222222', 2),
-(8, 'ocniic6a6rb6ilu5tg9c7d7dgc1t04d0', '333', '892223333', 3),
-(9, '3lt09udr58tt8g5d2ru55u76cvrf2ukf', '111', '8922444444', 3),
-(10, 'kbvt22jdkiad8a0bk7l2v4ff949eghtq', '55', '89222555555', 1);
+(7, '0jne3cka547vk4t6r4ua1eu7ggbafmkm', 'M1', '89222222222', 3),
+(8, 'ocniic6a6rb6ilu5tg9c7d7dgc1t04d0', '333', '892223333', 4),
+(9, '3lt09udr58tt8g5d2ru55u76cvrf2ukf', '111', '8922444444', 2),
+(10, 'kbvt22jdkiad8a0bk7l2v4ff949eghtq', '55', '89222555555', 3),
+(11, 'n3r6kp0kcrhrhd8rqv7tvclugr0meq7v', '111', '89222211741', 1);
 
 -- --------------------------------------------------------
 
@@ -270,7 +268,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT для таблицы `feedbacks`
@@ -300,7 +298,7 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT для таблицы `subbuy`
 --
 ALTER TABLE `subbuy`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

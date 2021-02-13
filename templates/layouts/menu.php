@@ -59,6 +59,10 @@ $nav = [
                 'uri' => "/allbuyers"
             ]
         ]
+    ],
+    [
+        'title' => "Все заказы",
+        'uri' => '/my-orders'
     ]
 ];
 echo setMenu($nav, $username);

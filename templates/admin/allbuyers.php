@@ -18,16 +18,16 @@
             <td>
                 <mark><span id="<?=$phone['id']?>"><?=$phone['human_status']?></span></mark>&nbsp
                 <?php if(is_admin($username)): ?> :: Поменять на:&nbsp
-                    <span class="<?php if($phone['status'] == 1): ?>btn-yellow<?php else: ?>btn<?php endif; ?> stat" data-id="<?=$phone['id']?>/1" id="<?=$phone['id']?>/1">
+                    <span class="<?php if($phone['status'] == 1): ?>btn-status<?php else: ?>btn<?php endif; ?> stat" data-id="<?=$phone['id']?>/1" id="<?=$phone['id']?>/1">
                         Оформлен
                     </span>&nbsp
-                    <span class="<?php if($phone['status'] == 2): ?>btn-yellow<?php else: ?>btn<?php endif; ?> stat" data-id="<?=$phone['id']?>/2" id="<?=$phone['id']?>/2">
+                    <span class="<?php if($phone['status'] == 2): ?>btn-status<?php else: ?>btn<?php endif; ?> stat" data-id="<?=$phone['id']?>/2" id="<?=$phone['id']?>/2">
                         Оплачен
                     </span>&nbsp
-                    <span class="<?php if($phone['status'] == 3): ?>btn-yellow<?php else: ?>btn<?php endif; ?> stat" data-id="<?=$phone['id']?>/3" id="<?=$phone['id']?>/3">
+                    <span class="<?php if($phone['status'] == 3): ?>btn-status<?php else: ?>btn<?php endif; ?> stat" data-id="<?=$phone['id']?>/3" id="<?=$phone['id']?>/3">
                         Отправлен
                     </span>&nbsp
-                    <span class="<?php if($phone['status'] == 4): ?>btn-yellow<?php else: ?>btn<?php endif; ?> stat" data-id="<?=$phone['id']?>/4" id="<?=$phone['id']?>/4">
+                    <span class="<?php if($phone['status'] == 4): ?>btn-status<?php else: ?>btn<?php endif; ?> stat" data-id="<?=$phone['id']?>/4" id="<?=$phone['id']?>/4">
                         Завершен
                     </span>
                 <?php endif; ?>
@@ -51,11 +51,11 @@
                     answer.forEach((item) => {
                         document.getElementById(item.id).innerText = item.human_status;
                         for(i=1;i<=4;i++) {
-                            document.getElementById(item.id+"/"+i).classList.remove('btn-yellow');
+                            document.getElementById(item.id+"/"+i).classList.remove('btn-status');
                             document.getElementById(item.id+"/"+i).classList.add('btn');
                         }
                         document.getElementById(item.id+"/"+item.status).classList.remove('btn');
-                        document.getElementById(item.id+"/"+item.status).classList.add('btn-yellow');
+                        document.getElementById(item.id+"/"+item.status).classList.add('btn-status');
                     });
                 }
             )();

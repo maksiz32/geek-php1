@@ -61,3 +61,9 @@ function sumOrder($sessionId) {
 function getName($sessionId) {
     return getDBRequest("SELECT name FROM subbuy WHERE id_session='{$sessionId}'")[0]['name'];
 }
+function getOrdersByName($username) {
+    return getDBRequest("SELECT subbuy.id, subbuy.id_session, subbuy.name, subbuy.phone, subbuy.status, basket.id_products, basket.price, products.name as product, products.description, products.likes, pictures.image FROM subbuy LEFT JOIN basket ON subbuy.id_session=basket.id_session LEFT JOIN products ON basket.id_products=products.id LEFT JOIN pictures ON pictures.id_products=basket.id_products WHERE subbuy.name='{$username}' GROUP BY basket.id_products ORDER BY id_session");
+}
+function getAllOrders() {
+    return getDBRequest("SELECT subbuy.id, subbuy.id_session, subbuy.name, subbuy.phone, subbuy.status, basket.id_products, basket.price, products.name as product, products.description, products.likes, pictures.image FROM subbuy LEFT JOIN basket ON subbuy.id_session=basket.id_session LEFT JOIN products ON basket.id_products=products.id LEFT JOIN pictures ON pictures.id_products=basket.id_products GROUP BY basket.id_products ORDER BY id_session");
+}
