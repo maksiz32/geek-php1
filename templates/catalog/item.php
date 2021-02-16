@@ -1,6 +1,15 @@
 <div class="titlePage">
     <h2>Просмотр</h2>
 </div>
+    <?php if(isset($messages)): ?>
+        <div class="info">
+            <ul>
+            <?php foreach($messages as $message): ?>
+                <li><?=$message?></li>
+            <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 <div>
     <?php if(!empty($item['name'])): ?>
     <h3>Название:</h3>
@@ -17,7 +26,9 @@
         <img src="/img/products/tmb/<?=$pic['image']?>">
     <?php endforeach;?>
     <?php endif;?>
-    <a href="/edit-item/<?=$item['id']?>" class="btn-green">Изменить</a>
+    <?php if(is_admin($username)): ?>
+        <a href="/edit-item/<?=$item['id']?>" class="btn-green">Изменить</a>
+    <?php endif; ?>
     <br><br>
     <hr>
     <br>

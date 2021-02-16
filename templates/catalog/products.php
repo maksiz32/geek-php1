@@ -1,6 +1,15 @@
 <div class="titlePage">
     <h2>Каталог товаров</h2>
 </div>
+    <?php if(isset($messages)): ?>
+        <div class="info">
+            <ul>
+            <?php foreach($messages as $message): ?>
+                <li><?=$message?></li>
+            <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 <div class="productGallery">
     <?php if (!empty($products)):
         foreach ($products as $item): ?>
@@ -24,14 +33,10 @@
                                 <span>Цена: <?=$item['price']?></span>
                                 <input type="hidden" value="<?=$item['price']?>" name="price"><br>
                                 <span>Likes: <span id="<?=$item['id']?>"><?=$item['likes']?></span>
-                                <i style="color: red;" class="bi bi-hand-thumbs-up like" data-id="<?=$item['id']?>"></i>
+                                <i style="color: red;" class="bi bi-hand-thumbs-up like pointer" data-id="<?=$item['id']?>"></i>
                             </div>
                         <br>
-                        <?php if ($username): ?>
-                            <button type="submit" class="toBuy" data-id="<?=$item['id']?>" data-price="<?=$item['price']?>">Купить</button>
-                        <?php else: ?>
-                            <div>Чтобы приобрести товар, авторизуйтесь</div>
-                        <?php endif; ?>
+                            <button type="submit" class="toBuy pointer" data-id="<?=$item['id']?>" data-price="<?=$item['price']?>">Купить</button>
                 <!-- </form> -->
             </div>
     <?php endforeach;

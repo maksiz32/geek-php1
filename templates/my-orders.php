@@ -1,4 +1,14 @@
 Все покупки:<br>
+<?php if(isset($messages)): ?>
+    <div class="info">
+        <ul>
+        <?php foreach($messages as $message): ?>
+            <li><?=$message?></li>
+        <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>
+<br>
 <?php if(isset($products)): ?>
     <table class="allOrders">
         <caption>Все заказы.</caption>
@@ -27,4 +37,6 @@
 <?php $i++ ?>
 <?php endforeach; ?>
     </table>
+<?php else: ?>
+    Чтобы видеть все свои заказы, авторизуйтесь
 <?php endif; ?>

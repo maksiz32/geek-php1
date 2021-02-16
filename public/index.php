@@ -32,11 +32,6 @@ switch ($url_array['main_page']) {
             $url_array['id'] = (int) $urlArray[2];
         }
         break;
-    case 'basket':
-        if (isset($urlArray[2])) {
-            $url_array['session_id'] = $urlArray[2];
-        }
-        break;
     case 'delbask':
         $url_array['basket_id'] = $urlArray[2];
         $url_array['basket_session_id'] = $urlArray[3];

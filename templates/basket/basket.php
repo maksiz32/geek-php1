@@ -1,6 +1,15 @@
 <div class="titlePage">
     <h2>Корзина</h2>
 </div>
+    <?php if(isset($messages)): ?>
+        <div class="info">
+            <ul>
+            <?php foreach($messages as $message): ?>
+                <li><?=$message?></li>
+            <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 <div>
 <h3><?=$name?></h3>
     Всего в корзине: <?=$countOrder?> товара, на сумму: <?=$summOrder?> рублей.

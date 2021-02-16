@@ -4,16 +4,15 @@
 <?php else:?>
     <h2>Добавление товара</h2>
 <?php endif;?>
-    
 </div>
-<?php if(is_array($message)): ?>
-    <ol>
-    <?php foreach($message as $mes): ?>
-        <p><li><?=$mes?></li></p>
-    <?php endforeach; ?>
-    </ol>
-<?php else: ?>
-        <p><?=$message ?></p>
+<?php if(isset($messages)): ?>
+    <div class="info">
+        <ul>
+        <?php foreach($messages as $message): ?>
+            <li><?=$message?></li>
+        <?php endforeach; ?>
+        </ul>
+    </div>
 <?php endif; ?>
 <div>
     <form action="" method="post" enctype="multipart/form-data">

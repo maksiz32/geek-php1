@@ -2,6 +2,15 @@
     <h2>Галерея</h2>
         <div><?=$message?></div>
 </div>
+    <?php if(isset($messages)): ?>
+        <div class="info">
+            <ul>
+            <?php foreach($messages as $message): ?>
+                <li><?=$message?></li>
+            <?php endforeach; ?>
+            </ul>
+        </div>
+    <?php endif; ?>
 <div class="gallery">
     <?php if (isset($images)):
         foreach ($images as $image): ?>

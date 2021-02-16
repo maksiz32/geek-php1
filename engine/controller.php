@@ -38,33 +38,6 @@ function prepareVariables($url_array) {
             $params['pic'] = getOnePic($id);
             break;
 
-        // case 'third':
-        // case 'fourth':
-        // case 'fifth':
-        //     $params['page'] = implode('/', ['exersices', $url_array[1]]);
-        //     break;
-        // case 'sixth':
-        //     $params['page'] = implode('/', ['exersices', $url_array[1]]);
-        //     if (!empty($_POST) && isset($_POST['argF'])) {
-        //         $argF = (float) strip_tags($_POST['argF']);
-        //         $argS = (float) strip_tags($_POST['argS']);
-        //         $operation = $_POST['operation'];
-        //         $summa = mathOperation($argF, $argS, $operation);
-        //         $p = compact('argF', 'argS', 'operation', 'summa');
-        //         $params = array_merge($params, $p);
-        //     } else if (!empty($_POST) && isset($_POST['argF1'])) {
-        //         $arr1 = ['argF1', 'argS1'];
-        //         $argF1 = (float) strip_tags($_POST['argF1']);
-        //         $argS1 = (float) strip_tags($_POST['argS1']);
-        //         foreach($_POST as $key => $val) {
-        //             if(!in_array($key, $arr1)) $operation1 = $key;
-        //         }
-        //         $summa1 = mathOperation($argF1, $argS1, $operation1);
-        //         $p = compact('argF1', 'argS1', 'operation1', 'summa1');
-        //         $params = array_merge($params, $p);
-        //     }
-        //     break;
-
         case 'products':
             $params['page'] = implode('/', ['catalog', $url_array['main_page']]);
             session_start();
@@ -225,6 +198,7 @@ function prepareVariables($url_array) {
         case 'my-orders':
             session_start();
             if (isset($_SESSION['username'])) {
+                $params['pics'] = getPictures();
                 if (is_admin($_SESSION['username'])) {
                     $params['products'] = getAllOrders();
                 } else {
